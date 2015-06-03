@@ -1,0 +1,27 @@
+{
+  "name": "rozu",
+  "version": "1.0.0",
+  "description": "Webhook server",
+  "main": "lib/app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avoidwork/rozu.git"
+  },
+  "keywords": [
+    "webhook",
+    "server",
+    "api"
+  ],
+  "author": "Jason Mulligan <jason.mulligan@avoidwork.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/avoidwork/rozu/issues"
+  },
+  "homepage": "https://github.com/avoidwork/rozu#readme",
+  "devDependencies": {
+    "tenso": "^1.5.2"
+  }
+}
