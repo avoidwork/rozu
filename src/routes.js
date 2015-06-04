@@ -70,9 +70,9 @@ var routes = {
 	},
 	post: {
 		"/register": register,
-		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function ( req, res ) {
-			collection_item( req, res, "webhooks" );
-		}
+		"/webhooks(\/?)": function ( req, res ) {
+			collection( req, res, "webhooks", validation.webhooks );
+		},
 	},
 	put: {
 		"/profile": profile,

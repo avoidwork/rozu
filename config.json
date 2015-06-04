@@ -2,7 +2,7 @@
 	"port": 8090,
 	"admin": [],
 	"auth": {
-		"protect": ["/admin", "/profile"],
+		"protect": ["/admin", "/profile", "/webhooks"],
 		"local": {
 			"enabled": true
 		}
@@ -75,5 +75,6 @@
 			"port": 6379
 		}
 	},
+	"title": "rozu"
 	"id": "rozu"
 }

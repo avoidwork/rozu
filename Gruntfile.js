@@ -39,6 +39,7 @@ module.exports = function (grunt) {
 					"src/regex.js",
 					"src/stores.js",
 					"src/routes.js",
+					"src/validation.js",
 					"src/outro.js"
 				],
 				dest : "lib/app.js"
