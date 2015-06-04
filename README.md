@@ -1,5 +1,7 @@
 # Rozu
 
+[![build status](https://secure.travis-ci.org/avoidwork/rozu.svg)](http://travis-ci.org/avoidwork/rozu)
+
 RESTful Webhook API in node.js, with MongoDB for persistent storage. 
 
 Each response will include a `Link` header, and an `Array` of `Objects` with `IANA` defined `rel` properties & URIs.
