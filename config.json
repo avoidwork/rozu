@@ -2,7 +2,7 @@
 	"port": 8090,
 	"admin": [],
 	"auth": {
-		"protect": ["/admin", "/profile", "/webhooks"],
+		"protect": ["/admin", "/profile", "/send", "/webhooks"],
 		"bearer": {
 			"enabled": true,
 			"tokens": []
@@ -37,7 +37,9 @@
 		"pass": ""
 	},
 	"instruction": {
+		"receive": "POST must include valid bearer token",
 		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
+		"send": "POST 'data' & 'uri' to send a webhook",
 		"webhooks_create": "POST 'name' & 'host'",
 		"verify": "Please check your email, and verify your account",
 		"verify_endpoint": "These aren't the droids you're looking for"
@@ -80,5 +82,6 @@
 		}
 	},
 	"title": "rozu",
-	"id": "rozu"
+	"id": "rozu",
+	"token": "token"
 }

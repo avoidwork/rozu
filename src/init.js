@@ -19,7 +19,7 @@ function init ( config ) {
 	} );
 
 	// Caching authenticated root route
-	ROOT_ROUTES = clone( config.auth.protect, true ).concat( [ "/logout" ] ).sort( array.sort );
+	ROOT_ROUTES = clone( config.auth.protect, true ).concat( [ "/logout", "/receive" ] ).sort( array.sort );
 
 	config.routes = routes;
 	config.auth.local.auth = login;
@@ -31,9 +31,9 @@ function init ( config ) {
 	} );
 
 	when( deferreds ).then( function () {
-		log( "DataStores loaded", "debug" );
+		log( "DataStore loaded", "debug" );
 	}, function ( e ) {
-		log( "Failed to load DataStores", "error" );
+		log( "Failed to load DataStore", "error" );
 		log( e, "error" );
 		process.exit( 1 );
 	} );

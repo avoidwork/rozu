@@ -23,7 +23,7 @@ var routes = {
 				res.respond( ROOT_ROUTES, 200, headers );
 			}
 			else {
-				res.respond( [ "/login", "/register" ] );
+				res.respond( [ "/login", "/receive", "/register" ] );
 			}
 		},
 		"/admin": function ( req, res ) {
@@ -38,8 +38,14 @@ var routes = {
 			}
 		},
 		"/profile": profile,
+		"/receive": {
+			"instruction": config.instruction.receive
+		},
 		"/register": {
 			"instruction": config.instruction.register
+		},
+		"/send": {
+			"instruction": config.instruction.send
 		},
 		"/users(\/?)": function ( req, res ) {
 			if ( req.session.admin ) {
@@ -70,9 +76,11 @@ var routes = {
 	},
 	post: {
 		"/register": register,
+		"/receive": receive,
+		"/send": send,
 		"/webhooks(\/?)": function ( req, res ) {
 			collection( req, res, "webhooks", validation.webhooks );
-		},
+		}
 	},
 	put: {
 		"/profile": profile,

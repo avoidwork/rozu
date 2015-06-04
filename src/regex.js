@@ -9,6 +9,7 @@ var regex = {
 	firstname: /(\w*){1,}/,
 	invite: /^\/invite/,
 	lastname: /(\w*){2,}/,
+	payload: /string|object/,
 	password: /[a-zA-Z0-9_-]{8,40}/,
 	std_port: /^(80|443)$/,
 	trailing_s: /s$/,
