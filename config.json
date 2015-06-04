@@ -3,10 +3,6 @@
 	"admin": [],
 	"auth": {
 		"protect": ["/admin", "/profile", "/send", "/webhooks"],
-		"bearer": {
-			"enabled": true,
-			"tokens": []
-		},
 		"local": {
 			"enabled": true
 		}
