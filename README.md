@@ -6,6 +6,18 @@ RESTful Webhook API in node.js, with MongoDB for persistent storage.
 
 Each response will include a `Link` header, and an `Array` of `Objects` with `IANA` defined `rel` properties & URIs.
 
+## How do I run Rozu?
+`Rozu` can be up and running in 3 steps! When run in a production environment, it's recommended that you use `NGINX`
+to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on Linux) to run `cocoa` is ideal. 
+
+1.  Clone [this](https://github.com/avoidwork/rozu) repository, or install from `npm`:
+    1.  `$ npm install rozu`
+    2.  `$ ln -s node_modules/rozu/config.json config.json`
+    3.  `$ ln -s node_modules/rozu/lib/app.js app.js`
+2.  Edit `config.json` to configure your email server, etc.
+3.  Run via `node index.js`
+4.  (Optional) Use the provided upstart recipe: `sudo cp node_modules/rozu/rozu.conf /etc/init & service start rozu`
+
 ## Getting Started
 The following steps outline how the system is intended to be utilized.
 
