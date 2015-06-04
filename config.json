@@ -33,7 +33,7 @@
 		"pass": ""
 	},
 	"instruction": {
-		"receive": "POST must include valid bearer token",
+		"receive": "POST must include valid token in query string",
 		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
 		"send": "POST 'data' & 'uri' to send a webhook",
 		"webhooks_create": "POST 'name' & 'host'",

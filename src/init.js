@@ -38,5 +38,15 @@ function init ( config ) {
 		process.exit( 1 );
 	} );
 
+	// Connecting to redis for inbound webhooks
+	client = redis.createClient( config.session.redis.port, config.session.redis.host );
+	client.on( "connect", function () {
+		log( "Connected to redis", "debug" );
+	} );
+
+	client.on( "error", function ( e ) {
+		log( e.message || e.stack || e, "error" );
+	} );
+
 	return tenso( config );
 }

@@ -9,6 +9,9 @@ var routes = {
 		"/users/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": user,
 		"/verify/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function ( req, res ) {
 			collection_item( req, res, "verify" );
+		},
+		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function ( req, res ) {
+			collection_item( req, res, "webhooks" );
 		}
 	},
 	"get": {

@@ -16,8 +16,8 @@ function receive ( req, res ) {
 		res.error( 400 );
 	} else {
 		res.respond( "Accepted", 202 );
+		client.publish( config.id + "_" + record.data.name, req.body );
 
-		// @todo redis
 		// @todo SSE
 	}
 }

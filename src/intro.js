@@ -7,6 +7,7 @@
 		tenso = require( "tenso" ),
 		keigai = require( "keigai" ),
 		bcrypt = require( "bcrypt" ),
+		redis = require( "redis" ),
 		nodemailer = require( "nodemailer" ),
 		uuid = require( "node-uuid" ).v1,
 		mpass = require( "mpass" ),
@@ -22,4 +23,4 @@
 		merge = util.merge,
 		when = util.when,
 		collections = lru( config.collection || 1000 ),
-		app, mta;
+		app, mta, client;
