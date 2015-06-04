@@ -101,7 +101,7 @@ A `GET` request to `/` will return different results, depending upon the state o
 
 ## Receiving webhook events
 Rozu has a publically accessible route `/receive` which will accept a JSON or form encoded payload & put it into **Redis**
-for pub/sub behavior in your local stack. Inbound requests must include a user specified token (`token` in `config.json`)
+for pub/sub behavior in your local stack. Inbound requests must include a user supplied token (`token` in `config.json`)
 which maps to a user owned webhook; tokens are v1 UUIDs.
 
 ## Requirements
