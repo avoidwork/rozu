@@ -104,6 +104,11 @@ Rozu has a publically accessible route `/receive` which will accept a JSON or fo
 for pub/sub behavior in your local stack. Inbound requests must include a user supplied token (`token` in `config.json`)
 which maps to a user owned webhook; tokens are v1 UUIDs.
 
+Inbound events will be published with a channel name of `config.id_webhook.name`, e.g. "rozu_github".
+
+## Sending webhook events
+This will be implemented in 1.1.0!
+
 ## Requirements
 - node.js or io.js
 - MongoDB
