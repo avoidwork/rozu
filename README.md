@@ -2,13 +2,29 @@
 
 [![build status](https://secure.travis-ci.org/avoidwork/rozu.svg)](http://travis-ci.org/avoidwork/rozu)
 
-RESTful Webhook API in node.js, with MongoDB for persistent storage. 
+Razu is a webhook API server, using MongoDB for persistent storage & Redis for pub/sub of inbound events
 
 Each response will include a `Link` header, and an `Array` of `Objects` with `IANA` defined `rel` properties & URIs.
 
+## Receiving webhook events
+Rozu has a publically accessible route `/receive` which will accept a JSON or form encoded payload & put it into **Redis**
+for pub/sub behavior in your local stack. Inbound requests must include a user supplied token (`token` in `config.json`)
+which maps to a registered webhook; tokens are v1 UUIDs.
+
+Inbound events will be published with a channel name of `config.id_webhook.name`, e.g. "rozu_github".
+
+## Sending webhook events
+This will be implemented in 1.1.0!
+
+## Requirements
+- node.js or io.js
+- MongoDB (persistent storage of accounts, & webhook configurations)
+- Redis (pub/sub for local stack of inbound events)
+- (Optional) nginx for SSL termination, & reverse proxy
+
 ## How do I run Rozu?
-`Rozu` can be up and running in 3 steps! When run in a production environment, it's recommended that you use `NGINX`
-to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on Linux) to run `cocoa` is ideal. 
+`Rozu` can be up and running in 3 steps! When run in a production environment, it's recommended that you use `nginx`
+to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on Linux) to run `rozu` is ideal. 
 
 1.  Clone [this](https://github.com/avoidwork/rozu) repository, or install from `npm`:
     1.  `$ npm install rozu`
@@ -125,22 +141,6 @@ A `GET` request to `/` will return different results, depending upon the state o
 	}
 }
 ```
-
-## Receiving webhook events
-Rozu has a publically accessible route `/receive` which will accept a JSON or form encoded payload & put it into **Redis**
-for pub/sub behavior in your local stack. Inbound requests must include a user supplied token (`token` in `config.json`)
-which maps to a user owned webhook; tokens are v1 UUIDs.
-
-Inbound events will be published with a channel name of `config.id_webhook.name`, e.g. "rozu_github".
-
-## Sending webhook events
-This will be implemented in 1.1.0!
-
-## Requirements
-- node.js or io.js
-- MongoDB
-- Redis
-- nginx for SSL termination / reverse proxy is ideal for public servers
 
 ## License
 Copyright (c) 2015 Jason Mulligan  

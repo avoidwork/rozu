@@ -3,6 +3,7 @@
 	"admin": [],
 	"auth": {
 		"protect": ["/admin", "/profile", "/send", "/webhooks"],
+		"unprotect": ["/receive"],
 		"local": {
 			"enabled": true
 		}
@@ -33,7 +34,7 @@
 		"pass": ""
 	},
 	"instruction": {
-		"receive": "POST must include valid token in query string",
+		"receive": "POST must include valid token",
 		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
 		"send": "POST 'data' & 'uri' to send a webhook",
 		"webhooks_create": "POST 'name' & 'host'",
@@ -64,7 +65,7 @@
 	"rate": {
 		"enabled": true,
 		"limit": 10,
-		"reset": 120
+		"reset": 30
 	},
 	"valid": {
 		"webhooks": ["name", "host"]
@@ -79,5 +80,6 @@
 	},
 	"title": "rozu",
 	"id": "rozu",
+	"validate": false,
 	"token": "token"
 }
