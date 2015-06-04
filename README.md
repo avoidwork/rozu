@@ -48,11 +48,16 @@ A `GET` request to `/` will return different results, depending upon the state o
 			},
 			{
 				"rel": "item",
+				"uri": "http://localhost:8080/receive"
+			},
+			{
+				"rel": "item",
 				"uri": "http://localhost:8080/register"
 			}
 		],
 		"result": [
 			"/login",
+			"/receive",
 			"/register"
 		]
 	}
@@ -78,6 +83,14 @@ A `GET` request to `/` will return different results, depending upon the state o
 			{
 				"rel": "item",
 				"uri": "http://localhost:8080/profile"
+			},
+			{
+				"rel": "item",
+				"uri": "http://localhost:8080/receive"
+			},
+			{
+				"rel": "item",
+				"uri": "http://localhost:8080/send"
 			}
 			{
 				"rel": "item",
@@ -92,6 +105,8 @@ A `GET` request to `/` will return different results, depending upon the state o
 			"/admin",
 			"/logout",
 			"/profile",
+			"/receive",
+			"/send",
 			"/users",
 			"/webhooks"
 		]
