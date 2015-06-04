@@ -99,6 +99,17 @@ A `GET` request to `/` will return different results, depending upon the state o
 }
 ```
 
+## Receiving webhook events
+Rozu has a publically accessible route `/receive` which will accept a JSON or form encoded payload & put it into **Redis**
+for pub/sub behavior in your local stack. Inbound requests must include a user specified token (`token` in `config.json`)
+which maps to a user owned webhook; tokens are v1 UUIDs.
+
+## Requirements
+- node.js or io.js
+- MongoDB
+- Redis
+- nginx for SSL termination / reverse proxy is ideal for public servers
+
 ## License
 Copyright (c) 2015 Jason Mulligan  
 All Rights Reserved
