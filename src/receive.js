@@ -23,7 +23,6 @@ function receive ( req, res ) {
 		}
 
 		client.publish( config.id + "_" + record.data.name, data );
-
-		// @todo SSE
+		sse.send( data );
 	}
 }

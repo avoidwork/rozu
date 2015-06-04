@@ -48,5 +48,8 @@ function init ( config ) {
 		log( e.message || e.stack || e, "error" );
 	} );
 
+	// Adding SSE stream
+	config.routes.get[ "/stream" ] = sse.init;
+
 	return tenso( config );
 }

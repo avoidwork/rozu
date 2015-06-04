@@ -1,6 +1,6 @@
 {
   "name": "rozu",
-  "version": "1.0.0-rc2",
+  "version": "1.0.0-rc3",
   "description": "Webhook server",
   "main": "lib/app.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/avoidwork/rozu#readme",
   "dependencies": {
     "bcrypt": "^0.8.3",
+    "express-sse": "^0.2.1",
     "jsonpatch": "^1.0.1",
     "keigai": "^1.3.16",
     "mpass": "^1.0.1",

@@ -2,7 +2,7 @@
 	"port": 8090,
 	"admin": [],
 	"auth": {
-		"protect": ["/admin", "/profile", "/send", "/webhooks"],
+		"protect": ["/admin", "/profile", "/send", "/stream", "/webhooks"],
 		"unprotect": ["/receive"],
 		"local": {
 			"enabled": true

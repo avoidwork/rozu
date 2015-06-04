@@ -4,6 +4,7 @@
 	var ROOT = __dirname + "/../",
 		ROOT_ROUTES = [],
 		VERSION = "{{VERSION}}",
+		SSE = require( "express-sse"),
 		tenso = require( "tenso" ),
 		keigai = require( "keigai" ),
 		bcrypt = require( "bcrypt" ),
@@ -23,4 +24,5 @@
 		merge = util.merge,
 		when = util.when,
 		collections = lru( config.collection || 1000 ),
+		sse = new SSE(),
 		app, mta, client;

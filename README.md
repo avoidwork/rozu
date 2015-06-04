@@ -119,6 +119,10 @@ A `GET` request to `/` will return different results, depending upon the state o
 			{
 				"rel": "item",
 				"uri": "http://localhost:8080/send"
+			},
+			{
+				"rel": "item",
+				"uri": "http://localhost:8080/stream"
 			}
 			{
 				"rel": "item",
@@ -135,6 +139,7 @@ A `GET` request to `/` will return different results, depending upon the state o
 			"/profile",
 			"/receive",
 			"/send",
+			"/stream",
 			"/users",
 			"/webhooks"
 		]
