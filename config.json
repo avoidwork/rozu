@@ -1,0 +1,79 @@
+{
+	"port": 8090,
+	"admin": [],
+	"auth": {
+		"protect": ["/admin", "/profile"],
+		"local": {
+			"enabled": true
+		}
+	},
+	"collection": 1000,
+	"logs": {
+		"level": "debug"
+	},
+	"headers": {
+		"accept": "application/json",
+		"cache-control": "private, no-cache"
+	},
+	"defaults": {
+		"store": {
+			"autosave": true,
+			"events": false,
+			"key": "id",
+			"mongodb": "mongodb://localhost/rozu",
+			"versioning": false
+		}
+	},
+	"email": {
+		"host": "smtp.host",
+		"port": 465,
+		"secure": true,
+		"from": "",
+		"user": "",
+		"pass": ""
+	},
+	"instruction": {
+		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
+		"webhooks_create": "POST 'name' & 'host'",
+		"verify": "Please check your email, and verify your account",
+		"verify_endpoint": "These aren't the droids you're looking for"
+	},
+	"error": {
+		"invalid_arguments": "Invalid arguments",
+		"invalid_credentials": "Invalid credentials",
+		"email_used": "Email has been used",
+		"already_authenticated": "Already authenticated"
+	},
+	"pageSize": 10,
+	"template": {
+		"email": {
+			"error": {
+				"subject": "Something's gone wrong",
+				"text": "Hi,\nIt's that moment when your server can't even.\n{{stack}}",
+				"html": "<p>Hi,</p><p>It's that moment when your server can't even.</p><p><pre><code>{{stack}}</code></pre></p>"
+			},
+			"verify": {
+				"subject": "Verify your rozu account",
+				"text": "Hi {{firstname}},\nPlease visit {{verify}} to activate your account.",
+				"html": "<p>Hi {{firstname}},</p><p>Please visit <a href=\"{{verify}}\" target=\"_blank\"> {{verify}}</a> to activate your account.</p>"
+			}
+		}
+	},
+	"rate": {
+		"enabled": true,
+		"limit": 10,
+		"reset": 120
+	},
+	"valid": {
+		"webhooks": ["name", "host"]
+	},
+	"session": {
+		"secret": "kermitthinkshelTer0%",
+		"store": "redis",
+		"redis": {
+			"host": "127.0.0.1",
+			"port": 6379
+		}
+	},
+	"id": "rozu"
+}

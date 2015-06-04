@@ -1,0 +1,25 @@
+( function () {
+	"use strict";
+
+	var ROOT = __dirname + "/../",
+		ROOT_ROUTES = [],
+		VERSION = "{{VERSION}}",
+		tenso = require( "tenso" ),
+		keigai = require( "keigai" ),
+		bcrypt = require( "bcrypt" ),
+		nodemailer = require( "nodemailer" ),
+		uuid = require( "node-uuid" ).v1,
+		mpass = require( "mpass" ),
+		config = require( ROOT + "config.json" ),
+		jsonpatch = require( "jsonpatch" ).apply_patch,
+		store = keigai.store,
+		util = keigai.util,
+		array = util.array,
+		clone = util.clone,
+		deferred = util.defer,
+		iterate = util.iterate,
+		lru = util.lru,
+		merge = util.merge,
+		when = util.when,
+		collections = lru( config.collection || 1000 ),
+		app, mta;
