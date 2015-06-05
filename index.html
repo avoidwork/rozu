@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Rozu by avoidwork</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Rozu</h1>
+      <h2 class="project-tagline">Webhook server</h2>
+      <a href="https://github.com/avoidwork/rozu" class="btn">View on GitHub</a>
+      <a href="https://github.com/avoidwork/rozu/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/avoidwork/rozu/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="rozu" class="anchor" href="#rozu" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rozu</h1>
+
+<p>Rozu is a webhook API server, using MongoDB for persistent storage &amp; Redis for pub/sub of inbound events</p>
+
+<p><img src="https://farm9.staticflickr.com/8892/18285216659_3508c5ed9f_o.png" alt="demo graphic" title="rozu demo"></p>
+
+<p><a href="http://travis-ci.org/avoidwork/rozu"><img src="https://secure.travis-ci.org/avoidwork/rozu.svg" alt="build status"></a></p>
+
+<p>Each response will include a <code>Link</code> header, and an <code>Array</code> of <code>Objects</code> with <code>IANA</code> defined <code>rel</code> properties &amp; URIs.</p>
+
+<h2>
+<a id="receiving-webhook-events" class="anchor" href="#receiving-webhook-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Receiving webhook events</h2>
+
+<p>Rozu has a publically accessible route <code>/receive</code> which will accept a JSON or form encoded payload &amp; put it into <strong>Redis</strong>
+for pub/sub behavior in your local stack. Inbound requests must include a user supplied token (<code>token</code> in <code>config.json</code>)
+which maps to a registered webhook; tokens are v1 UUIDs.</p>
+
+<p>Inbound events will be published with a channel name of <code>config.id_webhook.name</code>, e.g. "rozu_github".</p>
+
+<h2>
+<a id="sending-webhook-events" class="anchor" href="#sending-webhook-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sending webhook events</h2>
+
+<p>This will be implemented in 1.1.0!</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>node.js or io.js</li>
+<li>MongoDB (persistent storage of accounts, &amp; webhook configurations)</li>
+<li>Redis (pub/sub for local stack of inbound events)</li>
+<li>(Optional) nginx for SSL termination, &amp; reverse proxy</li>
+</ul>
+
+<h2>
+<a id="how-do-i-run-rozu" class="anchor" href="#how-do-i-run-rozu" aria-hidden="true"><span class="octicon octicon-link"></span></a>How do I run Rozu?</h2>
+
+<p><code>Rozu</code> can be up and running in 3 steps! When run in a production environment, it's recommended that you use <code>nginx</code>
+to terminate SSL, and reverse proxy to <code>Rozu</code>. Using a daemon like <code>upstart</code> (on Linux) to run <code>rozu</code> is ideal. </p>
+
+<ol>
+<li> Clone <a href="https://github.com/avoidwork/rozu">this</a> repository, or install from <code>npm</code>:
+
+<ol>
+<li> <code>$ npm install rozu</code>
+</li>
+<li> <code>$ ln -s node_modules/rozu/config.json config.json</code>
+</li>
+<li> <code>$ ln -s node_modules/rozu/lib/app.js app.js</code>
+</li>
+</ol>
+</li>
+<li> Edit <code>config.json</code> to configure your email server, etc.</li>
+<li> Run via <code>node index.js</code>
+</li>
+<li> (Optional) Use the provided upstart recipe: <code>sudo cp node_modules/rozu/rozu.conf /etc/init &amp; service start rozu</code>
+</li>
+</ol>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>The following steps outline how the system is intended to be utilized.</p>
+
+<ul>
+<li>Register an account</li>
+<li>Verify account</li>
+<li>Login with account</li>
+<li>Create a webhook by registering the remote host</li>
+</ul>
+
+<h2>
+<a id="registration" class="anchor" href="#registration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Registration</h2>
+
+<p>To register, make a <code>GET</code> request to <code>/register</code> to retrieve instructions.</p>
+
+<p>Registration is a two step process, requiring email verification. Please fill out <code>email</code> in <code>config.json</code>.</p>
+
+<h2>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
+
+<p>To authenticate, make a <code>GET</code> request to <code>/login</code> to retrieve instructions.</p>
+
+<p>To logout, make a <code>GET</code> request to <code>/logout</code>.</p>
+
+<h2>
+<a id="your-profile" class="anchor" href="#your-profile" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your Profile</h2>
+
+<p>Make a <code>GET</code> request to <code>/profile</code>. You will have CRUD operations, defined by the <code>allow</code> header.</p>
+
+<h2>
+<a id="getting-administrator-access" class="anchor" href="#getting-administrator-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Administrator Access</h2>
+
+<p>Once authenticated, make <code>GET</code> request to <code>/admin</code>; this requires your account email address in the <code>admin</code> Array in <code>config.json</code>.</p>
+
+<h2>
+<a id="routes" class="anchor" href="#routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Routes</h2>
+
+<p>A <code>GET</code> request to <code>/</code> will return different results, depending upon the state of your session.</p>
+
+<h3>
+<a id="unauthenticated" class="anchor" href="#unauthenticated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unauthenticated</h3>
+
+<div class="highlight highlight-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-c1">200</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>link<span class="pl-pds">"</span></span>: [
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/login<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/receive<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/register<span class="pl-pds">"</span></span>
+            }
+        ],
+        <span class="pl-s"><span class="pl-pds">"</span>result<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>/login<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/receive<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/register<span class="pl-pds">"</span></span>
+        ]
+    }
+}</pre></div>
+
+<h3>
+<a id="authenticated" class="anchor" href="#authenticated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authenticated</h3>
+
+<div class="highlight highlight-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-c1">200</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>link<span class="pl-pds">"</span></span>: [
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/admin<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/logout<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/profile<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/receive<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/send<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/stream<span class="pl-pds">"</span></span>
+            }
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/users<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/webhooks<span class="pl-pds">"</span></span>
+            }
+        ],
+        <span class="pl-s"><span class="pl-pds">"</span>result<span class="pl-pds">"</span></span>: [
+            <span class="pl-s"><span class="pl-pds">"</span>/admin<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/logout<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/profile<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/receive<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/send<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/stream<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/users<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>/webhooks<span class="pl-pds">"</span></span>
+        ]
+    }
+}</pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright (c) 2015 Jason Mulligan<br>
+All Rights Reserved</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/avoidwork/rozu">Rozu</a> is maintained by <a href="https://github.com/avoidwork">avoidwork</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
