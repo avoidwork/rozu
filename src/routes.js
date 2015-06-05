@@ -50,6 +50,7 @@ var routes = {
 		"/send": {
 			"instruction": config.instruction.send
 		},
+		"/stream": sse.init,
 		"/users(\/?)": function ( req, res ) {
 			if ( req.session.admin ) {
 				res.respond( stores.users.dump().map( function ( i ) {

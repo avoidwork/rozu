@@ -1,6 +1,6 @@
 {
   "name": "rozu",
-  "version": "1.0.0-rc3.1",
+  "version": "1.0.0",
   "description": "Webhook server",
   "main": "lib/app.js",
   "scripts": {
