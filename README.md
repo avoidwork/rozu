@@ -73,15 +73,15 @@ A `GET` request to `/` will return different results, depending upon the state o
 		"link": [
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/login"
+				"uri": "http://localhost:8090/login"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/receive"
+				"uri": "http://localhost:8090/receive"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/register"
+				"uri": "http://localhost:8090/register"
 			}
 		],
 		"result": [
@@ -103,35 +103,35 @@ A `GET` request to `/` will return different results, depending upon the state o
 		"link": [
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/admin"
+				"uri": "http://localhost:8090/admin"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/logout"
+				"uri": "http://localhost:8090/logout"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/profile"
+				"uri": "http://localhost:8090/profile"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/receive"
+				"uri": "http://localhost:8090/receive"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/send"
+				"uri": "http://localhost:8090/send"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/stream"
+				"uri": "http://localhost:8090/stream"
 			}
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/users"
+				"uri": "http://localhost:8090/users"
 			},
 			{
 				"rel": "item",
-				"uri": "http://localhost:8080/webhooks"
+				"uri": "http://localhost:8090/webhooks"
 			}
 		],
 		"result": [
