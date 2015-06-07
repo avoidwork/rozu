@@ -51,7 +51,7 @@
 	"template": {
 		"email": {
 			"verify": {
-				"subject": "Verify your rozu account",
+				"subject": "Verify your Rozu account",
 				"text": "Hi {{firstname}},\nPlease visit {{verify}} to activate your account.",
 				"html": "<p>Hi {{firstname}},</p><p>Please visit <a href=\"{{verify}}\" target=\"_blank\"> {{verify}}</a> to activate your account.</p>"
 			}
@@ -67,7 +67,7 @@
 		}
 	},
 	"valid": {
-		"webhooks": ["name", "host"]
+		"webhooks": ["name", "host", "uri", "encoding"]
 	},
 	"session": {
 		"secret": "kermitthinkshelTer0%",

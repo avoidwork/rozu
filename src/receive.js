@@ -9,9 +9,9 @@
 function receive (req, res) {
 	var data = clone(req.body, true),
 		token = req.parsed.query[config.token] || data[config.token],
-		record = token ? stores.webhooks.get(token) : undefined;
+		webhook = token ? stores.webhooks.get(token) : undefined;
 
-	if (!token || !record || ( config.validate && record.data.host.indexOf(req.parsed.hostname) === -1 )) {
+	if (!token || !webhook || ( config.validate && webhook.data.host.indexOf(req.parsed.hostname) === -1 )) {
 		res.error(401);
 	} else if (data === undefined || !regex.payload.test(typeof data)) {
 		res.error(400);
@@ -22,7 +22,7 @@ function receive (req, res) {
 			delete data[config.token];
 		}
 
-		client.publish(config.id + "_" + record.data.name, data);
-		sse.send(data);
+		client.publish(config.id + "_" + webhook.data.name, data);
+		sse.send({data: data, type: "inbound", webhook: webhook.data.name});
 	}
 }

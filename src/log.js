@@ -6,4 +6,8 @@
  */
 function log (arg, level) {
 	app.server.log(arg, level);
+
+	if (level === "error") {
+		sse.send({type: "error", data: arg.stack || arg.message || arg});
+	}
 }

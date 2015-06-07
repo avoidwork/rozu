@@ -14,6 +14,7 @@
 		mpass = require("mpass"),
 		config = require(ROOT + "config.json"),
 		jsonpatch = require("jsonpatch").apply_patch,
+		request = require("request"),
 		store = keigai.store,
 		util = keigai.util,
 		array = util.array,
