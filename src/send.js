@@ -18,8 +18,8 @@ function send (req, res, desc) {
 		token = data[config.token];
 		delete data[config.token];
 	} else {
-		data = desc.message;
-		token = stores.webhooks.indexes.name[desc.channel.replace(regex.send, "").replace(config.id + "_", "")];
+		data = json.decode(desc.message, true) || desc.message;
+		token = stores.webhooks.indexes.name[desc.channel.replace(regex.send, "").replace(config.id + "_", "")][0];
 	}
 
 	webhook = stores.webhooks.get(token);

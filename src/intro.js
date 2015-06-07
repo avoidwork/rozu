@@ -21,6 +21,7 @@
 		clone = util.clone,
 		deferred = util.defer,
 		iterate = util.iterate,
+		json = util.json,
 		lru = util.lru,
 		merge = util.merge,
 		when = util.when,
