@@ -9,9 +9,9 @@
 		"default": {
 			"outputSourceFiles": true
 		},
-		"systemName": "Tensō",
+		"systemName": "Rozu",
 		"footer": "",
-		"copyright": "Copyright &copy; 2014 Jason Mulligan",
+		"copyright": "Copyright &copy; 2015 Jason Mulligan",
 		"navType": "vertical",
 		"theme": "cerulean",
 		"linenums": true

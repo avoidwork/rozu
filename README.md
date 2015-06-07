@@ -1,7 +1,7 @@
 # Rozu
 Rozu is a webhook API server, using MongoDB for persistent storage & Redis for pub/sub of inbound events
 
-![demo graphic](https://farm9.staticflickr.com/8892/18285216659_3508c5ed9f_o.png "rozu demo")
+![demo graphic](https://cldup.com/yCd_d6AL58.png "rozu demo")
 
 [![build status](https://secure.travis-ci.org/avoidwork/rozu.svg)](http://travis-ci.org/avoidwork/rozu)
 

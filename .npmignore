@@ -1,0 +1,10 @@
+/.idea/
+/doc/
+/node_modules/
+/src/
+/test/
+.git
+.gitignore
+.travis.yml
+CHANGELOG.md
+Gruntfile.js
