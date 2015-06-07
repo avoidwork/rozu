@@ -17,7 +17,7 @@ function receive (req, res) {
 		res.error(400);
 	} else {
 		res.respond("Accepted", 202);
-		clientPublish.publish(config.id + "_" + webhook.data.name, data);
+		clientPublish.publish(config.id + "_" + webhook.data.name, serialize(data));
 		sse.send({data: data, type: "inbound", webhook: webhook.data.name});
 	}
 }

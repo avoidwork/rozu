@@ -6,8 +6,7 @@
  * @return {Object} Tenso instance
  */
 function init (config) {
-	var deferreds = [],
-		subscriptions = [];
+	var deferreds = [];
 
 	mta = nodemailer.createTransport({
 		host: config.email.host,
@@ -29,11 +28,15 @@ function init (config) {
 	// Loading datastores
 	iterate(stores, function (i) {
 		deferreds.push(i.restore());
-		subscriptions.push(config.id + "_" + i.id + "_send");
 	});
 
 	when(deferreds).then(function () {
 		log("DataStores loaded", "debug");
+
+		// Subscribing to outbound channels
+		array.each(stores.webhooks.get(), function (i) {
+			clientSubscribe.subscribe(config.id + "_" + i.data.name + "_send");
+		});
 	}, function (e) {
 		log("Failed to load DataStores", "error");
 		log(e, "error");
@@ -57,11 +60,6 @@ function init (config) {
 	// Setting a message handler to route outbound webhooks
 	clientSubscribe.on("message", function (channel, message) {
 		send(null, null, {channel: channel, message: message});
-	});
-
-	// Subscribing to outbound channels
-	array.each(subscriptions, function (i) {
-		clientSubscribe.subscribe(i);
 	});
 
 	return tenso(config);

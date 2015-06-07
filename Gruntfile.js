@@ -39,6 +39,7 @@ module.exports = function (grunt) {
 					"src/receive.js",
 					"src/regex.js",
 					"src/send.js",
+					"src/serialize.js",
 					"src/stores.js",
 					"src/validation.js",
 					"src/routes.js",
