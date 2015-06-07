@@ -10,6 +10,7 @@
 function send (req, res, desc) {
 	var err = false,
 		encoding = "json",
+		tmp = [],
 		data, token, uri, webhook;
 
 	if (req) {
@@ -50,6 +51,13 @@ function send (req, res, desc) {
 			if (encoding === "form") {
 				request.post(uri).form(data);
 			} else if (encoding === "querystring") {
+				if (typeof data === "object") {
+					array.each(Object.keys(data), function (i) {
+						tmp.push(i + "=" + encodeURIComponent(data[i]));
+					});
+					data = tmp.join("&");
+				}
+
 				uri += (uri.indexOf("?") > -1 ? "&" : "?") + data.replace(/^(\&|\?)/, "");
 				request.get(uri);
 			} else if (encoding === "json") {

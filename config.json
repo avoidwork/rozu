@@ -37,6 +37,7 @@
 		"receive": "POST must include valid token",
 		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
 		"send": "POST must include valid token",
+		"success": "Success",
 		"webhooks_create": "POST 'name' & 'host'",
 		"verify": "Please check your email, and verify your account",
 		"verify_endpoint": "These aren't the droids you're looking for"
