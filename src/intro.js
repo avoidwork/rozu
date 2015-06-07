@@ -26,4 +26,4 @@
 		when = util.when,
 		collections = lru(config.collection || 1000),
 		sse = new SSE(),
-		app, mta, client;
+		app, mta, clientPublish, clientSubscribe;

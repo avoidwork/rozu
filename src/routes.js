@@ -72,7 +72,7 @@ var routes = {
 	patch: {
 		"/profile": profile,
 		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
-			collection_item(req, res, "webhooks");
+			collection_item(req, res, "webhooks", validation.webhooks);
 		}
 	},
 	post: {
@@ -86,7 +86,7 @@ var routes = {
 	put: {
 		"/profile": profile,
 		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
-			collection_item(req, res, "webhooks");
+			collection_item(req, res, "webhooks", validation.webhooks);
 		}
 	}
 };

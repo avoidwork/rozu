@@ -17,12 +17,7 @@ function receive (req, res) {
 		res.error(400);
 	} else {
 		res.respond("Accepted", 202);
-
-		if (data instanceof Object) {
-			delete data[config.token];
-		}
-
-		client.publish(config.id + "_" + webhook.data.name, data);
+		clientPublish.publish(config.id + "_" + webhook.data.name, data);
 		sse.send({data: data, type: "inbound", webhook: webhook.data.name});
 	}
 }
