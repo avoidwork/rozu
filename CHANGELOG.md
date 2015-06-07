@@ -1,8 +1,8 @@
 # Change Log
 
-## [Unreleased](https://github.com/avoidwork/rozu/tree/HEAD)
+## [1.1.0](https://github.com/avoidwork/rozu/tree/1.1.0) (2015-06-07)
 
-[Full Changelog](https://github.com/avoidwork/rozu/compare/1.0.1...HEAD)
+[Full Changelog](https://github.com/avoidwork/rozu/compare/1.0.1...1.1.0)
 
 **Implemented enhancements:**
 
@@ -13,6 +13,8 @@
 - Trim the fat [\#8](https://github.com/avoidwork/rozu/issues/8)
 
 - Password regex is very limiting [\#7](https://github.com/avoidwork/rozu/issues/7)
+
+- Create `/send` to receive outbound event requests [\#5](https://github.com/avoidwork/rozu/issues/5)
 
 **Fixed bugs:**
 
