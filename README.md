@@ -15,7 +15,10 @@ which maps to a registered webhook; tokens are v1 UUIDs.
 Inbound events will be published with a channel name of `config.id_webhook.name`, e.g. "rozu_github".
 
 ## Sending webhook events
-This will be implemented in 1.1.0!
+Sending a webhook is as easy as publishing into Redis with a channel name of `config.id_webhook.name_send`, e.g.
+"rozu_github_send", or POST to `/send` after authenticating at `/login`. Outbound webhooks will default to POSTing a 
+JSON request body, but this can be overridden by specifying `"method": "GET"` and/or `"queryString": true` to change
+the HTTP method and/or how the data is sent.
 
 ## Requirements
 - node.js or io.js
