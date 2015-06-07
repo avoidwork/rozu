@@ -8,28 +8,25 @@
  * @param  {Function} fn   POST validation
  * @return {Undefined}     undefined
  */
-function collection ( req, res, type, fn ) {
+function collection (req, res, type, fn) {
 	var method = req.method,
 		id = req.session.passport.user.id,
 		data;
 
-	if ( method == "POST" ) {
-		data = load( type, req.body );
+	if (method == "POST") {
+		data = load(type, req.body);
 		data.user_id = id;
 
-		fn( data, function ( e ) {
-			if ( e ) {
-				res.error( 400, e.message || e );
+		fn(data, function (e) {
+			if (e) {
+				res.error(400, e.message || e);
+			} else {
+				collection_update(req, res, id, type, uuid(), data, config.instruction[type + "_new"]);
 			}
-			else {
-				collection_update( req, res, id, type, uuid(), data, config.instruction[ type + "_new" ] );
-			}
-		} );
-	}
-	else if ( req.session.admin ) {
-		res.respond( stores[ type ].dump() );
-	}
-	else {
-		collection_read( req, res, id, type );
+		});
+	} else if (req.session.admin) {
+		res.respond(stores[type].dump());
+	} else {
+		collection_read(req, res, id, type);
 	}
 }

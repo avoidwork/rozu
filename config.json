@@ -65,7 +65,11 @@
 	"rate": {
 		"enabled": true,
 		"limit": 10,
-		"reset": 30
+		"reset": 30,
+		"multiplier": {
+			"limit": 45,
+			"reset": 2
+		}
 	},
 	"valid": {
 		"webhooks": ["name", "host"]

@@ -11,23 +11,22 @@
  * @param  {Object} msg  [Optional] Instruction
  * @return {Undefined}   undefined
  */
-function collection_update ( req, res, user, type, key, data, msg ) {
-	collections.remove( user + "_" + type );
+function collection_update (req, res, user, type, key, data, msg) {
+	collections.remove(user + "_" + type);
 
-	stores[ type ].set( key, data, false, req.method == "PUT" ).then( function ( rec ) {
-		if ( !regex.invite.test( req.url ) ) {
-			res.respond( {
+	stores[type].set(key, data, false, req.method == "PUT").then(function (rec) {
+		if (!regex.invite.test(req.url)) {
+			res.respond({
 				id: rec.key,
-				instruction: ( msg || config.instruction.success ).replace( /\:id/g, rec.key )
-			} );
+				instruction: ( msg || config.instruction.success ).replace(/\:id/g, rec.key)
+			});
+		} else {
+			res.respond({
+				instruction: ( msg || config.instruction.success ).replace(/\:id/g, rec.key)
+			});
 		}
-		else {
-			res.respond( {
-				instruction: ( msg || config.instruction.success ).replace( /\:id/g, rec.key )
-			} );
-		}
-	}, function ( e ) {
-		res.error( 500, e.message || e );
-		log( e, "error" );
-	} );
+	}, function (e) {
+		res.error(500, e.message || e);
+		log(e, "error");
+	});
 }

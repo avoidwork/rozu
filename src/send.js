@@ -6,6 +6,6 @@
  * @param  {Object} res Client response
  * @return {Undefined}  undefined
  */
-function send ( req, res ) {
-	res.error( 501 );
+function send (req, res) {
+	res.error(501);
 }

@@ -7,8 +7,8 @@
  * @param  {Function} callback Callback function
  * @return {Undefined}         undefined
  */
-function password_compare ( password, hash, callback ) {
-	bcrypt.compare( password, hash, function ( e, match ) {
-		callback( e, match );
-	} );
+function password_compare (password, hash, callback) {
+	bcrypt.compare(password, hash, function (e, match) {
+		callback(e, match);
+	});
 }
