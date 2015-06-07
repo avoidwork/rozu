@@ -24,7 +24,7 @@
 
 <p>Rozu is a webhook API server, using MongoDB for persistent storage &amp; Redis for pub/sub of inbound events</p>
 
-<p><img src="https://farm9.staticflickr.com/8892/18285216659_3508c5ed9f_o.png" alt="demo graphic" title="rozu demo"></p>
+<p><img src="https://cldup.com/yCd_d6AL58.png" alt="demo graphic" title="rozu demo"></p>
 
 <p><a href="http://travis-ci.org/avoidwork/rozu"><img src="https://secure.travis-ci.org/avoidwork/rozu.svg" alt="build status"></a></p>
 
@@ -42,7 +42,15 @@ which maps to a registered webhook; tokens are v1 UUIDs.</p>
 <h2>
 <a id="sending-webhook-events" class="anchor" href="#sending-webhook-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sending webhook events</h2>
 
-<p>This will be implemented in 1.1.0!</p>
+<p>Sending a webhook is as easy as publishing into Redis with a channel name of <code>config.id_webhook.name_send</code>,
+e.g. "rozu_github_send", or POST to <code>/send</code> after authenticating at <code>/login</code>. Outbound webhook properties to configure
+the request are <code>uri</code>, &amp; <code>encoding</code>. If not specified <code>encoding</code> will default to <code>json</code>. The value of <code>encoding</code> can be
+<code>json</code>, <code>querystring</code>, or <code>form</code>. The request body will contain the webhook id as the value of <code>config.token</code>, for
+validation.</p>
+
+<p>Sending an outbound webhook from Redis may look like this:</p>
+
+<div class="highlight highlight-javascript"><pre>clientPublish.publish(<span class="pl-s"><span class="pl-pds">"</span>rozu_github_send<span class="pl-pds">"</span></span>, serialize({<span class="pl-s"><span class="pl-pds">"</span>token<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>bb8bf370-0a54-11e5-9c1d-9389475d0a28<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>The Matrix!<span class="pl-pds">"</span></span>}));</pre></div>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
