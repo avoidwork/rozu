@@ -41,18 +41,22 @@ function send (req, res, desc) {
 		}
 
 		if (typeof data === "string") {
-			data += "&" + config.token + "=" + webhook.id;
+			data += "&" + config.token + "=" + webhook.key;
 		} else {
-			data[config.token] = webhook.id;
+			data[config.token] = webhook.key;
 		}
 
-		if (encoding === "form") {
-			request.post(uri).form(data);
-		} else if (encoding === "querystring") {
-			uri += (uri.indexOf("?") > -1 ? "&" : "?") + data.replace(/^(\&|\?)/, "");
-			request.get(uri);
-		} else if (encoding === "json") {
-			request({method: "POST", json: true, body: data});
+		try {
+			if (encoding === "form") {
+				request.post(uri).form(data);
+			} else if (encoding === "querystring") {
+				uri += (uri.indexOf("?") > -1 ? "&" : "?") + data.replace(/^(\&|\?)/, "");
+				request.get(uri);
+			} else if (encoding === "json") {
+				request({body: data, method: "POST", json: true, uri: uri});
+			}
+		} catch (e) {
+			log(e, "error");
 		}
 
 		sse.send({data: data, type: "outbound", webhook: webhook.data.name});
