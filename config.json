@@ -50,11 +50,6 @@
 	"pageSize": 10,
 	"template": {
 		"email": {
-			"error": {
-				"subject": "Something's gone wrong",
-				"text": "Hi,\nIt's that moment when your server can't even.\n{{stack}}",
-				"html": "<p>Hi,</p><p>It's that moment when your server can't even.</p><p><pre><code>{{stack}}</code></pre></p>"
-			},
 			"verify": {
 				"subject": "Verify your rozu account",
 				"text": "Hi {{firstname}},\nPlease visit {{verify}} to activate your account.",
