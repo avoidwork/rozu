@@ -10,16 +10,18 @@
 function send (req, res, desc) {
 	var err = false,
 		encoding = "json",
-		data, uri, webhook;
+		data, token, uri, webhook;
 
 	if (req) {
 		data = req.body;
-		webhook = stores.webhooks.get(data.token);
-		delete data.token;
+		token = data[config.token];
+		delete data[config.token];
 	} else {
 		data = desc.message;
-		webhook = stores.webhooks.get(desc.channel.replace(regex.send, ""));
+		token = stores.webhooks.indexes.name[desc.channel.replace(regex.send, "").replace(config.id + "_", "")];
 	}
+
+	webhook = stores.webhooks.get(token);
 
 	if (!webhook) {
 		err = true;
