@@ -15,7 +15,7 @@ function notify ( type, data, template, uri ) {
 		html = clone( template.html, true );
 		keys = text.match( /({{.*}})/g );
 
-		array.iterate( keys, function ( i ) {
+		array.each( keys, function ( i ) {
 			var r = new RegExp( i, "g" ),
 				k, v;
 

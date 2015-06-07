@@ -33,7 +33,7 @@ function profile ( req, res ) {
 			} );
 
 			// Removing account from workforces
-			array.iterate( stores.workforces.records, function ( i ) {
+			array.each( stores.workforces.records, function ( i ) {
 				if ( i.data.users && array.contains( i.data.users, user.id ) ) {
 					collections.remove( i.data.user_id + "_workforces" );
 					array.remove( i.data.users, user.id );

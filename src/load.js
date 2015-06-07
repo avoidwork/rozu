@@ -9,7 +9,7 @@
 function load ( type, obj ) {
 	var result = {};
 
-	array.iterate( config.valid[ type ] || [], function ( i ) {
+	array.each( config.valid[ type ] || [], function ( i ) {
 		if ( obj[ i ] !== undefined ) {
 			result[ i ] = obj[ i ];
 		}
