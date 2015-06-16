@@ -19,7 +19,7 @@ function init (config) {
 	});
 
 	// Caching authenticated root route
-	ROOT_ROUTES = clone(config.auth.protect, true).concat(["/logout", "/receive"]).sort(array.sort);
+	ROOT_ROUTES = clone(config.auth.protect, true).concat(["logout", "receive"]).sort(array.sort);
 
 	config.routes = routes;
 	config.auth.local.auth = login;

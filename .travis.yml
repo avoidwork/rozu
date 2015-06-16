@@ -3,3 +3,10 @@ node_js:
   - "0.10"
   - "0.12"
   - "iojs"
+
+services:
+  - mongodb
+  - redis-server
+
+before_script:
+  - mongo mydb_test --eval 'db.addUser("travis", "rozu");'

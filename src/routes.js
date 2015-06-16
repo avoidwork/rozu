@@ -25,7 +25,7 @@ var routes = {
 				headers["cache-control"] = "private " + headers["cache-control"];
 				res.respond(ROOT_ROUTES, 200, headers);
 			} else {
-				res.respond(["/login", "/receive", "/register"]);
+				res.respond(["login", "receive", "register"]);
 			}
 		},
 		"/admin": function (req, res) {

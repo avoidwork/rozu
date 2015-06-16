@@ -77,29 +77,27 @@ A `GET` request to `/` will return different results, depending upon the state o
 
 ```json
 {
-	"status": 200,
+	"data": [
+		"login",
+		"receive",
+		"register"
+	],
 	"error": null,
-	"data": {
-		"link": [
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/login"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/receive"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/register"
-			}
-		],
-		"result": [
-			"/login",
-			"/receive",
-			"/register"
-		]
-	}
+	"links": [
+		{
+			"rel": "item",
+			"uri": "/login"
+		},
+		{
+			"rel": "item",
+			"uri": "/receive"
+		},
+		{
+			"rel": "item",
+			"uri": "/register"
+		}
+	],
+	"status": 200
 }
 ```
 
@@ -107,54 +105,52 @@ A `GET` request to `/` will return different results, depending upon the state o
 
 ```json
 {
-	"status": 200,
+	"data": [
+		"admin",
+		"logout",
+		"profile",
+		"receive",
+		"send",
+		"stream",
+		"users",
+		"webhooks"
+	],
 	"error": null,
-	"data": {
-		"link": [
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/admin"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/logout"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/profile"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/receive"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/send"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/stream"
-			}
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/users"
-			},
-			{
-				"rel": "item",
-				"uri": "http://localhost:8090/webhooks"
-			}
-		],
-		"result": [
-			"/admin",
-			"/logout",
-			"/profile",
-			"/receive",
-			"/send",
-			"/stream",
-			"/users",
-			"/webhooks"
-		]
-	}
+	"links": [
+		{
+			"rel": "item",
+			"uri": "/admin"
+		},
+		{
+			"rel": "item",
+			"uri": "/logout"
+		},
+		{
+			"rel": "item",
+			"uri": "/profile"
+		},
+		{
+			"rel": "item",
+			"uri": "/receive"
+		},
+		{
+			"rel": "item",
+			"uri": "/send"
+		},
+		{
+			"rel": "item",
+			"uri": "/stream"
+		}
+		{
+			"rel": "item",
+			"uri": "/users"
+		},
+		{
+			"rel": "item",
+			"uri": "/webhooks"
+		}
+	],
+	"status": 200
 }
 ```
 

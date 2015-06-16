@@ -2,15 +2,17 @@
 	"port": 8090,
 	"admin": [],
 	"auth": {
-		"protect": ["/admin", "/profile", "/send", "/stream", "/webhooks"],
-		"unprotect": ["/receive"],
+		"protect": ["admin", "profile", "send", "stream", "webhooks"],
+		"unprotect": ["receive"],
 		"local": {
 			"enabled": true
 		}
 	},
 	"collection": 1000,
 	"logs": {
-		"level": "debug"
+		"level": "info",
+		"stdout": false,
+		"dtrace": false
 	},
 	"headers": {
 		"accept": "application/json",
@@ -38,7 +40,7 @@
 		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
 		"send": "POST must include valid token",
 		"success": "Success",
-		"webhooks_create": "POST 'name' & 'host'",
+		"webhooks_create": "POST 'name', & 'host'",
 		"verify": "Please check your email, and verify your account",
 		"verify_endpoint": "These aren't the droids you're looking for"
 	},
