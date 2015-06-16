@@ -132,83 +132,79 @@ to terminate SSL, and reverse proxy to <code>Rozu</code>. Using a daemon like <c
 <a id="unauthenticated" class="anchor" href="#unauthenticated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unauthenticated</h3>
 
 <div class="highlight highlight-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-c1">200</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>login<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>receive<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>register<span class="pl-pds">"</span></span>
+    ],
     <span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
-    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>link<span class="pl-pds">"</span></span>: [
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/login<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/receive<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/register<span class="pl-pds">"</span></span>
-            }
-        ],
-        <span class="pl-s"><span class="pl-pds">"</span>result<span class="pl-pds">"</span></span>: [
-            <span class="pl-s"><span class="pl-pds">"</span>/login<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/receive<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/register<span class="pl-pds">"</span></span>
-        ]
-    }
+    <span class="pl-s"><span class="pl-pds">"</span>links<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/login<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/receive<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/register<span class="pl-pds">"</span></span>
+        }
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-c1">200</span>
 }</pre></div>
 
 <h3>
 <a id="authenticated" class="anchor" href="#authenticated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authenticated</h3>
 
 <div class="highlight highlight-json"><pre>{
-    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-c1">200</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>admin<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>logout<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>profile<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>receive<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>send<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>stream<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>users<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>webhooks<span class="pl-pds">"</span></span>
+    ],
     <span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
-    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
-        <span class="pl-s"><span class="pl-pds">"</span>link<span class="pl-pds">"</span></span>: [
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/admin<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/logout<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/profile<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/receive<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/send<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/stream<span class="pl-pds">"</span></span>
-            }
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/users<span class="pl-pds">"</span></span>
-            },
-            {
-                <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
-                <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:8090/webhooks<span class="pl-pds">"</span></span>
-            }
-        ],
-        <span class="pl-s"><span class="pl-pds">"</span>result<span class="pl-pds">"</span></span>: [
-            <span class="pl-s"><span class="pl-pds">"</span>/admin<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/logout<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/profile<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/receive<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/send<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/stream<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/users<span class="pl-pds">"</span></span>,
-            <span class="pl-s"><span class="pl-pds">"</span>/webhooks<span class="pl-pds">"</span></span>
-        ]
-    }
+    <span class="pl-s"><span class="pl-pds">"</span>links<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/admin<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/logout<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/profile<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/receive<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/send<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/stream<span class="pl-pds">"</span></span>
+        }
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/users<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>rel<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>item<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>uri<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/webhooks<span class="pl-pds">"</span></span>
+        }
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-c1">200</span>
 }</pre></div>
 
 <h2>
