@@ -1,0 +1,20 @@
+[Unit]
+Description=Job that runs the rozu server
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node /opt/rozu/app.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=rozu
+Environment=NODE_ENV=production
+LimitFSIZE=unlimited
+LimitCPU=unlimited
+LimitAS=unlimited
+LimitNOFILE=64000
+LimitRSS=unlimited
+LimitNPROC=32000
+
+[Install]
+WantedBy=multi-user.target

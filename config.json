@@ -11,7 +11,7 @@
 	"collection": 1000,
 	"logs": {
 		"level": "info",
-		"stdout": false,
+		"stdout": true,
 		"dtrace": false
 	},
 	"headers": {

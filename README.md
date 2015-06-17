@@ -43,7 +43,15 @@ to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on
     3.  `$ ln -s node_modules/rozu/lib/app.js app.js`
 2.  Edit `config.json` to configure your email server, etc.
 3.  Run via `node index.js`
-4.  (Optional) Use the provided upstart recipe: `sudo cp node_modules/rozu/rozu.conf /etc/init & service start rozu`
+
+#### Upstart
+Use the provided upstart recipe: `sudo cp node_modules/rozu/rozu.conf /etc/init & service start rozu`
+
+#### Systemd
+Use the provided systemd service: `sudo cp node_modules/rozu/rozu.service /etc/systemd/system & systemctl enable rozu & systemctl start rozu`
+
+#### What about Windows?
+You need to have Visual Studio Community Edition (or higher) installed, because some dependencies must compile.
 
 ## Getting Started
 The following steps outline how the system is intended to be utilized.
