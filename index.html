@@ -81,11 +81,24 @@ to terminate SSL, and reverse proxy to <code>Rozu</code>. Using a daemon like <c
 </ol>
 </li>
 <li> Edit <code>config.json</code> to configure your email server, etc.</li>
-<li> Run via <code>node index.js</code>
-</li>
-<li> (Optional) Use the provided upstart recipe: <code>sudo cp node_modules/rozu/rozu.conf /etc/init &amp; service start rozu</code>
+<li> Run via <code>node app.js</code>
 </li>
 </ol>
+
+<h4>
+<a id="upstart" class="anchor" href="#upstart" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upstart</h4>
+
+<p>Use the provided upstart recipe: <code>sudo cp node_modules/rozu/rozu.conf /etc/init &amp; service start rozu</code></p>
+
+<h4>
+<a id="systemd" class="anchor" href="#systemd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Systemd</h4>
+
+<p>Use the provided systemd service: <code>sudo cp node_modules/rozu/rozu.service /etc/systemd/system &amp; systemctl enable rozu &amp; systemctl start rozu</code></p>
+
+<h4>
+<a id="what-about-windows" class="anchor" href="#what-about-windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about Windows?</h4>
+
+<p>You need to have Visual Studio Community Edition (or higher) installed, because some dependencies must compile.</p>
 
 <h2>
 <a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
