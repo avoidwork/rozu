@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.2](https://github.com/avoidwork/rozu/tree/2.0.2) (2015-06-17)
+
+[Full Changelog](https://github.com/avoidwork/rozu/compare/2.0.1...2.0.2)
+
+## [2.0.1](https://github.com/avoidwork/rozu/tree/2.0.1) (2015-06-17)
+
+[Full Changelog](https://github.com/avoidwork/rozu/compare/2.0.0...2.0.1)
+
 ## [2.0.0](https://github.com/avoidwork/rozu/tree/2.0.0) (2015-06-16)
 
 [Full Changelog](https://github.com/avoidwork/rozu/compare/1.1.0...2.0.0)
