@@ -7,7 +7,7 @@
  * @return {Undefined} undefined
  */
 function user (req, res) {
-	var admin = req.session.admin,
+	let admin = req.session.admin,
 		id = req.url.replace(/.*\//, ""),
 		obj, output;
 
@@ -18,15 +18,15 @@ function user (req, res) {
 	obj = stores.users.get(id);
 
 	if (obj) {
-		if (req.method == "DELETE") {
-			stores.users.del(obj.key).then(function () {
+		if (req.method === "DELETE") {
+			stores.users.del(obj[0]).then(function () {
 				res.respond(config.instruction.success);
 			}, function (e) {
 				res.error(500, e.message || e);
 				log(e, "error");
 			});
 		} else {
-			output = stores.users.dump([obj])[0];
+			output = clone(obj[1]);
 			delete output.password;
 			res.respond(output);
 		}

@@ -5,29 +5,36 @@
  * @param  {Object} req Client request
  * @param  {Object} res Client response
  * @param  {Object} msg Redis sourced message {channel: "", message: ""}
- * @return {Undefined}  undefined
+ * @return {Object}     Deferred
  */
 function send (req, res, desc) {
-	var err = false,
+	let defer = deferred(),
+		err = false,
 		encoding = "json",
-		tmp = [],
-		data, token, uri, webhook;
+		data, qdata, token, uri, webhook;
 
 	if (req) {
 		data = req.body;
 		token = data[config.token];
 		delete data[config.token];
 	} else {
-		data = json.decode(desc.message, true) || desc.message;
+		try {
+			data = JSON.parse(desc.message);
+		} catch (e) {
+			log(e, "error");
+			data = desc.message;
+		}
+
 		token = stores.webhooks.indexes.name[desc.channel.replace(regex.send, "").replace(config.id + "_", "")][0];
+		// token = stores.wobhooks.indexes.get('name'); ?
 	}
 
-	webhook = stores.webhooks.get(token);
+	webhook = stores.webhooks.get(token) || [null, {}];
 
-	if (!webhook) {
+	if (!webhook[0]) {
 		err = true;
 	} else {
-		uri = webhook.data.uri;
+		uri = webhook[1].uri;
 
 		if (!uri) {
 			err = true;
@@ -35,7 +42,7 @@ function send (req, res, desc) {
 	}
 
 	if (!err) {
-		encoding = regex.encoding.test(webhook.data.encoding) ? webhook.data.encoding : "json";
+		encoding = regex.encoding.test(webhook[1].encoding) ? webhook[1].encoding : "json";
 
 		if (res) {
 			res.respond("Accepted", 202);
@@ -51,38 +58,50 @@ function send (req, res, desc) {
 			if (encoding === "form") {
 				request.post(uri).form(data).on("error", function (e) {
 					log(e, "error");
+					defer.reject(e);
+				}).on("response", function (resp) {
+					defer.resolve(resp);
 				});
 			} else if (encoding === "querystring") {
 				if (typeof data === "object") {
-					array.each(Object.keys(data), function (i) {
-						tmp.push(i + "=" + encodeURIComponent(data[i]));
-					});
-					data = tmp.join("&");
+					qdata = Object.keys(data).map(function (i) {
+						return i + "=" + encodeURIComponent(data[i]);
+					}).join("&");
 				}
 
-				uri += (uri.indexOf("?") > -1 ? "&" : "?") + data.replace(/^(\&|\?)/, "");
+				uri += (uri.indexOf("?") > -1 ? "&" : "?") + qdata.replace(/^(\&|\?)/, "");
 				request.get(uri).on("error", function (e) {
 					log(e, "error");
+					defer.reject(e);
+				}).on("response", function (resp) {
+					defer.resolve(resp);
 				});
 			} else if (encoding === "json") {
 				request({body: data, method: "POST", json: true, uri: uri}).on("error", function (e) {
 					log(e, "error");
+					defer.reject(e);
+				}).on("response", function (resp) {
+					defer.resolve(resp);
 				});
 			}
 		} catch (e) {
 			log(e, "error");
+			defer.reject(e);
 		}
 
-		sse.send({data: data, type: "outbound", webhook: webhook.data.name});
+		sse.send({data: data, type: "outbound", webhook: webhook[1].name});
 	} else {
 		if (res) {
-			if (webhook.data.name) {
-				res.error(400, webhook.data.name + " is not configured for outbound webhooks");
+			if (webhook[1].name) {
+				res.error(400, webhook[1].name + " is not configured for outbound webhooks");
 			} else {
 				res.error(400);
 			}
 		}
 
-		log((webhook.data.name || "Unknown") + " cannot be found, or is not configured for outbound webhooks", "error");
+		log((webhook[1].name || "Unknown") + " cannot be found, or is not configured for outbound webhooks", "error");
+		defer.reject(new Error("Misconfigured webhook"));
 	}
+
+	return defer.promise;
 }

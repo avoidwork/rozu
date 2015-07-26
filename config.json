@@ -20,8 +20,6 @@
 	},
 	"defaults": {
 		"store": {
-			"autosave": true,
-			"events": false,
 			"key": "id",
 			"mongodb": "mongodb://localhost/rozu",
 			"versioning": false

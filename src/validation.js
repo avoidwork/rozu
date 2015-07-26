@@ -3,9 +3,9 @@
  *
  * @type {Object}
  */
-var validation = {
+let validation = {
 	webhooks: function (arg, cb) {
-		var result = !( ( typeof arg.name != "string" || arg.name === "" ) || ( typeof arg.host != "string" || arg.host === "" ) );
+		let result = !((typeof arg.name !== "string" || arg.name === "") || (typeof arg.host !== "string" || arg.host === ""));
 
 		if (result) {
 			cb(null, true);

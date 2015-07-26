@@ -10,38 +10,37 @@
  * @return {Undefined}      undefined
  */
 function collection_item (req, res, type, fn, links) {
-	var user = req.session.passport.user,
+	let luser = req.session.passport.user,
 		id = req.body ? req.body[type.replace(regex.trailing_s, "") + "_id"] || req.url.replace(/.*\//, "") : req.url.replace(/.*\//, ""),
 		method = req.method,
 		admin = req.session.admin === true,
 		rec = stores[type].get(id),
-		data;
+		data, output;
 
-	if (!rec || ( rec && rec.data.user_id !== user.id && !admin )) {
+	if (!rec || (rec && rec[1].user_id !== luser.id && !admin)) {
 		return res.error(404);
 	}
 
-	if (method == "DELETE") {
-		collection_delete(req, res, user.id, type, id);
-	} else if (method == "GET" || method == "HEAD" || method == "OPTIONS") {
-		rec = stores[type].dump([rec])[0];
+	if (method === "DELETE") {
+		collection_delete(req, res, luser.id, type, id);
+	} else if (method === "GET" || method === "HEAD" || method === "OPTIONS") {
+		output = clone(rec[1]);
 
 		if (!admin) {
-			delete rec.user_id;
+			delete output.user_id;
 		}
 
 		if (links !== undefined) {
 			iterate(links, function (v, k) {
-				rec[k] = v.replace(/:id/g, id);
+				output[k] = v.replace(/:id/g, id);
 			});
 		}
 
-		res.respond(rec);
-	}
-	else {
+		res.respond(output);
+	} else {
 		if (method === "PATCH") {
 			try {
-				data = jsonpatch(stores[type].get(id).data, req.body);
+				data = jsonpatch(clone(rec[1]).output, req.body);
 			} catch (e) {
 				return res.error(400, e.message || e);
 			}
@@ -51,13 +50,13 @@ function collection_item (req, res, type, fn, links) {
 			data = load(type, req.body);
 		}
 
-		data.user_id = user.id;
+		data.user_id = luser.id;
 
 		fn(data, function (e) {
 			if (e) {
 				res.error(400, e.message || e);
 			} else {
-				collection_update(req, res, user.id, type, id, data);
+				collection_update(req, res, luser.id, type, id, data);
 			}
 		}, method);
 	}

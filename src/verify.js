@@ -7,17 +7,20 @@
  * @return {Undefined} undefined
  */
 function verify (req, res) {
-	var vid = req.url.replace(/.*\//, ""),
+	let vid = req.url.replace(/.*\//, ""),
 		vrec = stores.verify.get(vid),
-		user = vrec ? stores.users.get(vrec.data.user_id) : null;
+		vuser = vrec ? stores.users.get(vrec[1].user_id) : null,
+		luser;
 
-	if (user) {
+	if (vuser) {
+		luser = clone(vuser[1]);
+
 		// Changing record shape
-		user.data.verified = true;
-		delete user.data.verify_id;
+		luser.verified = true;
+		delete luser.verify_id;
 
 		// Overwriting record to remove the 'verified_id' property
-		stores.users.set(user.key, user.data, false, true).then(function () {
+		stores.users.set(vuser[0], luser, false, true).then(function () {
 			stores.verify.del(vid).then(null, function (e) {
 				log(e, "error");
 			});

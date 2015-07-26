@@ -8,24 +8,23 @@
  * @return {Undefined}       undefined
  */
 function login (username, password, callback) {
-	stores.users.select({email: username, active: true, verified: true}).then(function (recs) {
-		var user;
+	stores.users.find({email: username, active: true, verified: true}).then(function (recs) {
+		let luser;
 
 		if (recs.length === 0) {
-			return callback(new Error(config.error.invalid_credentials), null);
+			callback(new Error(config.error.invalid_credentials), null);
+		} else {
+			luser = clone(recs[0][1]);
+			password_compare(password, luser.password, function (e, match) {
+				if (e) {
+					callback(e, null);
+				} else if (match) {
+					callback(null, luser);
+				} else {
+					callback(new Error(config.error.invalid_credentials), null);
+				}
+			});
 		}
-
-		user = stores.users.dump([recs[0]])[0];
-
-		password_compare(password, user.password, function (e, match) {
-			if (e) {
-				callback(e, null);
-			} else if (match) {
-				callback(null, user);
-			} else {
-				callback(new Error(config.error.invalid_credentials), null);
-			}
-		});
 	}, function (e) {
 		callback(e, null);
 	});

@@ -9,14 +9,14 @@
  * @return {Object}          Potentially modified settings settings
  */
 function rate (req, settings) {
-	var authenticated = ( req.session.passport !== undefined && req.session.passport.user !== undefined ),
+	let authenticated = (req.session.passport !== undefined && req.session.passport.user !== undefined),
 		limit = req.server.config.rate.limit,
 		seconds;
 
 	if (authenticated && settings.limit === limit) {
 		seconds = parseInt(new Date().getTime() / 1000, 10);
 		settings.limit = settings.limit * config.rate.multiplier.limit;
-		settings.remaining = settings.limit - ( limit - settings.remaining );
+		settings.remaining = settings.limit - (limit - settings.remaining);
 		settings.time_reset = settings.limit * config.rate.multiplier.reset;
 		settings.reset = seconds + settings.time_reset;
 	}

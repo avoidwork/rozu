@@ -6,7 +6,7 @@
  * @return {Object}      Promise
  */
 function new_user (args) {
-	var defer = deferred();
+	let defer = deferred();
 
 	if (!args.password) {
 		args.password = mpass();
@@ -25,13 +25,13 @@ function new_user (args) {
 				verified: false,
 				verify_id: uuid()
 			}).then(function (rec) {
-				stores.verify.set(rec.data.verify_id, {user_id: rec.key}).then(function () {
+				stores.verify.set(rec[1].verify_id, {user_id: rec[0]}).then(function () {
 					defer.resolve({user: rec, password: args.password});
-				}, function (e) {
-					defer.reject(e);
+				}, function (err) {
+					defer.reject(err);
 				});
-			}, function (e) {
-				defer.reject(e);
+			}, function (err) {
+				defer.reject(err);
 			});
 		}
 	});

@@ -6,7 +6,7 @@
  * @returns {String}  JSON String
  */
 function serialize (arg) {
-	var result;
+	let result;
 
 	if (typeof arg === "string") {
 		result = arg;
