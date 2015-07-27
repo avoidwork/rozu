@@ -10,22 +10,20 @@ function cache (id, type) {
 	let defer = deferred(),
 		key = id + "_" + type,
 		data = collections.get(key),
-		lstore = stores[type];
+		lstore = stores[type],
+		ldata, recs;
 
 	if (data) {
 		defer.resolve(data);
 	} else {
-		lstore.find({user_id: id}).then(function (recs) {
-			let ldata = recs.length === 0 ? [] : lstore.toArray(recs).map(function (i) {
-				delete i.user_id;
-				return i;
-			});
-
-			collections.set(id + "_" + type, ldata);
-			defer.resolve(ldata);
-		}, function (e) {
-			defer.reject(e);
+		recs = lstore.find({user_id: id});
+		ldata = recs.length === 0 ? [] : lstore.toArray(recs).map(function (i) {
+			delete i.user_id;
+			return i;
 		});
+
+		collections.set(id + "_" + type, ldata);
+		defer.resolve(ldata);
 	}
 
 	return defer.promise;

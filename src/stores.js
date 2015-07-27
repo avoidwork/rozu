@@ -5,6 +5,6 @@
  */
 let stores = {
 	webhooks: haro(null, merge(config.defaults.store, {id: "webhooks", index: ["user_id", "host", "name"]})),
-	users: haro(null, merge(config.defaults.store, {id: "users", index: ["email"]})),
+	users: haro(null, merge(config.defaults.store, {id: "users", index: ["email", "active|email|verified"]})),
 	verify: haro(null, merge(config.defaults.store, {id: "verify", index: ["user_id"]}))
 };
