@@ -6,5 +6,5 @@
  * @return {Mixed}     Clone of input
  */
 function clone (arg) {
-    return JSON.parse(JSON.stringify(arg));
+	return JSON.parse(JSON.stringify(arg));
 }
