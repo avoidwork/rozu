@@ -7,7 +7,7 @@
  * @return {Undefined}  undefined
  */
 function register (req, res) {
-	var args;
+	let args;
 
 	if (req.isAuthenticated()) {
 		res.error(400, config.error.already_authenticated);
@@ -21,7 +21,7 @@ function register (req, res) {
 		} else {
 			new_user(args).then(function (arg) {
 				res.respond({user_id: arg.user.key, instruction: config.instruction.verify});
-				notify("email", stores.users.dump([arg.user])[0], config.template.email.verify, ( ( req.headers["x-forwarded-proto"] ? req.headers["x-forwarded-proto"] + ":" : req.parsed.protocol ) + "//" + ( req.headers["x-forwarded-protocol"] || req.parsed.host ) )).then(null, function (e) {
+				notify("email", stores.users.dump([arg.user])[0], config.template.email.verify, ((req.headers["x-forwarded-proto"] ? req.headers["x-forwarded-proto"] + ":" : req.parsed.protocol) + "//" + (req.headers["x-forwarded-protocol"] || req.parsed.host))).then(null, function (e) {
 					log(e, "error");
 				});
 			}, function (e) {

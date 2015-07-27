@@ -2,40 +2,41 @@
  * Initializes the application
  *
  * @method init
- * @param  {Object} config Tenso config
+ * @param  {Object} lconfig Tenso lconfig
  * @return {Object} Tenso instance
  */
-function init (config) {
-	var deferreds = [];
+function init (lconfig) {
+	let deferreds = [];
 
 	mta = nodemailer.createTransport({
-		host: config.email.host,
-		port: config.email.port,
-		secure: config.email.secure,
+		host: lconfig.email.host,
+		port: lconfig.email.port,
+		secure: lconfig.email.secure,
 		auth: {
-			user: config.email.user,
-			pass: config.email.pass
+			user: lconfig.email.user,
+			pass: lconfig.email.pass
 		}
 	});
 
 	// Caching authenticated root route
-	ROOT_ROUTES = clone(config.auth.protect, true).concat(["logout", "receive"]).sort(array.sort);
+	ROOT_ROUTES = clone(lconfig.auth.protect).concat(["logout", "receive"]).sort();
 
-	config.routes = routes;
-	config.auth.local.auth = login;
-	config.rate.override = rate;
+	lconfig.routes = routes;
+	lconfig.auth.local.auth = login;
+	lconfig.rate.override = rate;
 
-	// Loading datastores
+	// Loading DataStores
 	iterate(stores, function (i) {
-		deferreds.push(i.restore());
+		i.register("mongo", haro_mongo);
+		deferreds.push(i.load("mongo"));
 	});
 
-	when(deferreds).then(function () {
+	Promise.all(deferreds).then(function () {
 		log("DataStores loaded", "debug");
 
 		// Subscribing to outbound channels
 		array.each(stores.webhooks.get(), function (i) {
-			clientSubscribe.subscribe(config.id + "_" + i.data.name + "_send");
+			clientSubscribe.subscribe(lconfig.id + "_" + i[1].name + "_send");
 		});
 	}, function (e) {
 		log("Failed to load DataStores", "error");
@@ -44,8 +45,8 @@ function init (config) {
 	});
 
 	// Connecting to redis for inbound/outbound webhooks
-	clientPublish = redis.createClient(config.session.redis.port, config.session.redis.host);
-	clientSubscribe = redis.createClient(config.session.redis.port, config.session.redis.host);
+	clientPublish = redis.createClient(lconfig.session.redis.port, lconfig.session.redis.host);
+	clientSubscribe = redis.createClient(lconfig.session.redis.port, lconfig.session.redis.host);
 
 	array.each([clientPublish, clientSubscribe], function (i, idx) {
 		i.on("connect", function () {
@@ -62,5 +63,5 @@ function init (config) {
 		send(null, null, {channel: channel, message: message});
 	});
 
-	return tenso(config);
+	return tenso(lconfig);
 }

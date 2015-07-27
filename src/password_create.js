@@ -11,9 +11,7 @@ function password_create (password, callback) {
 		if (e) {
 			callback(e, null);
 		} else {
-			bcrypt.hash(password, salt, function (e, hash) {
-				callback(e, hash);
-			});
+			bcrypt.hash(password, salt, callback);
 		}
 	});
 }

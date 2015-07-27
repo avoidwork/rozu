@@ -1,4 +1,6 @@
 # Rozu
+
+[![Join the chat at https://gitter.im/avoidwork/rozu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/avoidwork/rozu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Rozu is a webhook API server, using MongoDB for persistent storage & Redis for pub/sub of inbound events
 
 ![demo graphic](https://cldup.com/yCd_d6AL58.png "rozu demo")
@@ -45,10 +47,10 @@ to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on
 3.  Run via `node app.js`
 
 #### Upstart
-Use the provided upstart recipe: `sudo cp node_modules/rozu/rozu.conf /etc/init & service start rozu`
+Use the provided upstart recipe: `sudo cp node_modules/rozu/rozu.conf /etc/init; service start rozu`
 
 #### Systemd
-Use the provided systemd service: `sudo cp node_modules/rozu/rozu.service /etc/systemd/system & systemctl enable rozu & systemctl start rozu`
+Use the provided systemd service: `sudo cp node_modules/rozu/rozu.service /etc/systemd/system; systemctl enable rozu & systemctl start rozu`
 
 #### What about Windows?
 You need to have Visual Studio Community Edition (or higher) installed, because some dependencies must compile.

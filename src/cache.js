@@ -7,21 +7,22 @@
  * @return {Object}      Promise
  */
 function cache (id, type) {
-	var defer = deferred(),
+	let defer = deferred(),
 		key = id + "_" + type,
-		data = collections.get(key);
+		data = collections.get(key),
+		lstore = stores[type];
 
 	if (data) {
 		defer.resolve(data);
 	} else {
-		stores[type].select({user_id: id}).then(function (recs) {
-			var data = recs.length === 0 ? [] : stores[type].dump(recs).map(function (i) {
+		lstore.find({user_id: id}).then(function (recs) {
+			let ldata = recs.length === 0 ? [] : lstore.toArray(recs).map(function (i) {
 				delete i.user_id;
 				return i;
 			});
 
-			collections.set(id + "_" + type, data);
-			defer.resolve(data);
+			collections.set(id + "_" + type, ldata);
+			defer.resolve(ldata);
 		}, function (e) {
 			defer.reject(e);
 		});

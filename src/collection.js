@@ -9,11 +9,11 @@
  * @return {Undefined}     undefined
  */
 function collection (req, res, type, fn) {
-	var method = req.method,
+	let method = req.method,
 		id = req.session.passport.user.id,
 		data;
 
-	if (method == "POST") {
+	if (method === "POST") {
 		data = load(type, req.body);
 		data.user_id = id;
 
@@ -25,7 +25,7 @@ function collection (req, res, type, fn) {
 			}
 		});
 	} else if (req.session.admin) {
-		res.respond(stores[type].dump());
+		res.respond(stores[type].toArray());
 	} else {
 		collection_read(req, res, id, type);
 	}

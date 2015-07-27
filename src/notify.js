@@ -8,7 +8,7 @@
  * @return {Object}          Promise
  */
 function notify (type, data, template, uri) {
-	var defer = deferred(),
+	let defer = deferred(),
 		keys, text, html;
 
 	if (type === "email") {
@@ -17,7 +17,7 @@ function notify (type, data, template, uri) {
 		keys = text.match(/({{.*}})/g);
 
 		array.each(keys, function (i) {
-			var r = new RegExp(i, "g"),
+			let r = new RegExp(i, "g"),
 				k, v;
 
 			if (i !== "{{verify}}") {

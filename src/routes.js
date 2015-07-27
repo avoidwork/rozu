@@ -3,20 +3,20 @@
  *
  * @type Object
  */
-var routes = {
+const routes = {
 	"delete": {
-		"/profile": profile,
-		"/users/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": user,
-		"/verify/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
+		"/profile(\/?)": profile,
+		"/users/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": user,
+		"/verify/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": function (req, res) {
 			collection_item(req, res, "verify");
 		},
-		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
+		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": function (req, res) {
 			collection_item(req, res, "webhooks");
 		}
 	},
 	"get": {
 		"/": function (req, res) {
-			var session = req.session,
+			let session = req.session,
 				headers;
 
 			if (session && session.passport && session.passport.user) {
@@ -28,27 +28,27 @@ var routes = {
 				res.respond(["login", "receive", "register"]);
 			}
 		},
-		"/admin": function (req, res) {
-			var user = req.session.passport.user;
+		"/admin(\/?)": function (req, res) {
+			let luser = req.session.passport.user;
 
-			if (array.contains(config.admin, user.email)) {
+			if (array.contains(config.admin, luser.email)) {
 				req.session.admin = true;
 				res.redirect("/");
 			} else {
 				res.error(403);
 			}
 		},
-		"/profile": profile,
-		"/receive": {
+		"/profile(\/?)": profile,
+		"/receive(\/?)": {
 			"instruction": config.instruction.receive
 		},
-		"/register": {
+		"/register(\/?)": {
 			"instruction": config.instruction.register
 		},
-		"/send": {
+		"/send(\/?)": {
 			"instruction": config.instruction.send
 		},
-		"/stream": sse.init,
+		"/stream(\/?)": sse.init,
 		"/users(\/?)": function (req, res) {
 			if (req.session.admin) {
 				res.respond(stores.users.dump().map(function (i) {
@@ -59,33 +59,33 @@ var routes = {
 				res.error(403);
 			}
 		},
-		"/users/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": user,
+		"/users/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": user,
 		"/verify(\/?)": config.instruction.verify_endpoint,
-		"/verify/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": verify,
+		"/verify/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": verify,
 		"/webhooks(\/?)": function (req, res) {
 			collection(req, res, "webhooks");
 		},
-		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
+		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": function (req, res) {
 			collection_item(req, res, "webhooks");
 		}
 	},
 	patch: {
-		"/profile": profile,
-		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
+		"/profile(\/?)": profile,
+		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": function (req, res) {
 			collection_item(req, res, "webhooks", validation.webhooks);
 		}
 	},
 	post: {
-		"/register": register,
-		"/receive": receive,
-		"/send": send,
+		"/register(\/?)": register,
+		"/receive(\/?)": receive,
+		"/send(\/?)": send,
 		"/webhooks(\/?)": function (req, res) {
 			collection(req, res, "webhooks", validation.webhooks);
 		}
 	},
 	put: {
-		"/profile": profile,
-		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}": function (req, res) {
+		"/profile(\/?)": profile,
+		"/webhooks/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(\/?)": function (req, res) {
 			collection_item(req, res, "webhooks", validation.webhooks);
 		}
 	}

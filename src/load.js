@@ -7,7 +7,7 @@
  * @return {Object}      Validated shape
  */
 function load (type, obj) {
-	var result = {};
+	let result = {};
 
 	array.each(config.valid[type] || [], function (i) {
 		if (obj[i] !== undefined) {

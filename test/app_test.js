@@ -1,6 +1,6 @@
 var hippie = require("hippie"),
 	app = require("../lib/app"),
-	array = require("keigai").util.array;
+	array = require("retsu");
 
 function api () {
 	return hippie().base("http://localhost:8090").expectHeader("Content-Type", "application/json").json();

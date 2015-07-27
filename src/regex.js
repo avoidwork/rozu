@@ -3,7 +3,7 @@
  *
  * @type Object
  */
-var regex = {
+const regex = {
 	email: /\w*@\w*/,
 	encoding: /form|json|querystring/,
 	extension: /\..*$/,
