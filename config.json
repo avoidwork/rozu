@@ -21,7 +21,9 @@
 	"defaults": {
 		"store": {
 			"key": "id",
-			"mongodb": "mongodb://localhost/rozu",
+			"adapters": {
+				"mongo": "mongodb://localhost/rozu"
+			},
 			"versioning": false
 		}
 	},
