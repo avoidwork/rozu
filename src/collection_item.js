@@ -42,7 +42,7 @@ function collection_item (req, res, type, fn, links) {
 			try {
 				data = jsonpatch(clone(rec[1]).output, req.body);
 			} catch (e) {
-				return res.error(400, e.message || e);
+				return res.error(400, e);
 			}
 
 			data = load(type, data);
@@ -54,7 +54,7 @@ function collection_item (req, res, type, fn, links) {
 
 		fn(data, function (e) {
 			if (e) {
-				res.error(400, e.message || e);
+				res.error(400, e);
 			} else {
 				collection_update(req, res, luser.id, type, id, data);
 			}

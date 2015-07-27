@@ -22,7 +22,7 @@ function user (req, res) {
 			stores.users.del(obj[0]).then(function () {
 				res.respond(config.instruction.success);
 			}, function (e) {
-				res.error(500, e.message || e);
+				res.error(500, e);
 				log(e, "error");
 			});
 		} else {

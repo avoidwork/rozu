@@ -32,7 +32,7 @@ function profile (req, res) {
 				}
 			});
 		}, function (e) {
-			res.error(500, e.message || e);
+			res.error(500, e);
 			log(e, "error");
 		});
 	} else if (method === "GET" || method === "HEAD" || method === "OPTIONS") {
@@ -54,7 +54,7 @@ function profile (req, res) {
 					req.session.passport.user = clone(rec[1]);
 					res.respond(config.instruction.success);
 				}, function (e) {
-					res.error(500, e.message || e);
+					res.error(500, e);
 					log(e, "error");
 				});
 			}

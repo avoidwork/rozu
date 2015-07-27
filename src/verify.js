@@ -26,7 +26,7 @@ function verify (req, res) {
 			});
 			res.respond({login_uri: "/login", "instruction": "Your account has been verified, please login"});
 		}, function (e) {
-			res.error(500, e.message || e);
+			res.error(500, e);
 			log(e, "error");
 		});
 	} else {

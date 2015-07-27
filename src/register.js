@@ -25,7 +25,7 @@ function register (req, res) {
 					log(e, "error");
 				});
 			}, function (e) {
-				res.error(500, e.message || e);
+				res.error(500, e);
 				log(e, "error");
 			});
 		}

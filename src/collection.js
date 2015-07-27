@@ -19,13 +19,13 @@ function collection (req, res, type, fn) {
 
 		fn(data, function (e) {
 			if (e) {
-				res.error(400, e.message || e);
+				res.error(400, e);
 			} else {
 				collection_update(req, res, id, type, uuid(), data, config.instruction[type + "_new"]);
 			}
 		});
 	} else if (req.session.admin) {
-		res.respond(stores[type].toArray());
+		res.respond(stores[type].toArray(null, false));
 	} else {
 		collection_read(req, res, id, type);
 	}

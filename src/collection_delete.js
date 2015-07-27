@@ -14,7 +14,7 @@ function collection_delete (req, res, user_id, type, key) {
 	stores[type].del(key).then(function () {
 		res.respond(config.instruction.success);
 	}, function (e) {
-		res.error(500, e.message || e);
+		res.error(500, e);
 		log(e, "error");
 	});
 }

@@ -25,7 +25,7 @@ function collection_update (req, res, luser, type, key, data, msg) {
 
 		res.respond(output);
 	}, function (e) {
-		res.error(500, e.message || e);
+		res.error(500, e);
 		log(e, "error");
 	});
 }

@@ -17,7 +17,7 @@ function cache (id, type) {
 		defer.resolve(data);
 	} else {
 		recs = lstore.find({user_id: id});
-		ldata = recs.length === 0 ? [] : lstore.toArray(recs).map(function (i) {
+		ldata = recs.length === 0 ? [] : lstore.toArray(recs, false).map(function (i) {
 			delete i.user_id;
 			return i;
 		});
