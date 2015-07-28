@@ -24,6 +24,7 @@
 			"adapters": {
 				"mongo": "mongodb://localhost/rozu"
 			},
+			"logging": false,
 			"versioning": false
 		}
 	},

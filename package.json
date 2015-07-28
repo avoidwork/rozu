@@ -32,7 +32,7 @@
     "bcrypt": "^0.8.3",
     "es6-promise": "^2.3.0",
     "express-sse": "^0.2.1",
-    "haro": "^1.5.0",
+    "haro": "^1.5.1",
     "haro-mongo": "^1.0.6",
     "jsonpatch": "^1.0.1",
     "mpass": "^1.0.1",

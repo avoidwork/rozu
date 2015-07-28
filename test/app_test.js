@@ -2,6 +2,8 @@ var hippie = require("hippie"),
 	app = require("../lib/app"),
 	array = require("retsu");
 
+app.server.config.logs.stdout = false;
+
 function api () {
 	return hippie().base("http://localhost:8090").expectHeader("Content-Type", "application/json").json();
 }
