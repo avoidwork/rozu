@@ -38,7 +38,7 @@
 	},
 	"instruction": {
 		"receive": "POST must include valid token",
-		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register",
+		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha-numeric characters",
 		"send": "POST must include valid token",
 		"success": "Success",
 		"webhooks_create": "POST 'name', & 'host'",
@@ -71,6 +71,7 @@
 		}
 	},
 	"valid": {
+		"users": ["firstname", "lastname", "email", "password"],
 		"webhooks": ["name", "host", "uri", "encoding"]
 	},
 	"session": {

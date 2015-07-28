@@ -103,7 +103,7 @@ describe("Public", function () {
 				.expectValue("links", [
 					{uri: '/', rel: 'collection'}
 				])
-				.expectValue("data", {instruction: "POST your 'firstname', 'lastname', 'email', & 'password' to register"})
+				.expectValue("data", {instruction: "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha-numeric characters"})
 				.expectValue("error", null)
 				.expectValue("status", 200)
 				.end(function (err) {

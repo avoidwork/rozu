@@ -11,7 +11,7 @@ const regex = {
 	invite: /^\/invite/,
 	lastname: /(\w*){2,}/,
 	payload: /string|object/,
-	password: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~]).{8,40})/,
+	password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
 	send: /_send$/,
 	std_port: /^(80|443)$/,
 	trailing_s: /s$/,
