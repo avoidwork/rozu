@@ -164,7 +164,7 @@ describe("Public", function () {
 					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 					.expectValue("error", null)
 					.expectValue("status", 200)
-					.end(function (err, res, body) {
+					.end(function (err) {
 						if (err) {
 							throw err;
 						}
