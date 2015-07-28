@@ -1,11 +1,22 @@
 var hippie = require("hippie"),
 	app = require("../lib/app"),
-	array = require("retsu");
+	array = require("retsu"),
+	csrf = 'x-csrf-token',
+	token;
 
 app.server.config.logs.stdout = false;
 
+function persistCookies (opts, next) {
+	opts.jar = true;
+	next( opts );
+}
+
 function api () {
-	return hippie().base("http://localhost:8090").expectHeader("Content-Type", "application/json").json();
+	return hippie().base("http://localhost:8090").use(persistCookies).expectHeader("Content-Type", "application/json").json();
+}
+
+function get_token (fn, url) {
+	return api().get(url || "/login").end(fn);
 }
 
 describe("Public", function () {
@@ -112,6 +123,55 @@ describe("Public", function () {
 					}
 					done();
 				});
+		});
+	});
+
+	describe("POST /register (csrf error)", function () {
+		it("returns an object with an error", function (done) {
+			api()
+				.post("/register")
+				.form()
+				.send({firstname: "John", lastname: "Doe", email: "jdoe@nowhere", password: 'blahBlah1'})
+				.expectStatus(403)
+				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
+				.expectValue("data", null)
+				.expectValue("error", "CSRF token missing")
+				.expectValue("status", 403)
+				.end(function (err) {
+					if (err) {
+						throw err;
+					}
+					done();
+				});
+		});
+	});
+
+	describe("POST /register success", function () {
+		it("returns an object with instructions", function (done) {
+			get_token(function (err, res) {
+				if (err) {
+					throw err;
+				}
+
+				token = res.headers[csrf];
+				api()
+					.header(csrf, token)
+					.post("/register")
+					.form()
+					.send({firstname: "John", lastname: "Doe", email: "jdoe@nowhere", password: "blahBlah1"})
+					.json()
+					.expectStatus(200)
+					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
+					.expectValue("error", null)
+					.expectValue("status", 200)
+					.end(function (err, res, body) {
+						if (err) {
+							throw err;
+						}
+
+						done();
+					});
+			});
 		});
 	});
 });
