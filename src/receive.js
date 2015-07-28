@@ -7,7 +7,7 @@
  * @return {Undefined}  undefined
  */
 function receive (req, res) {
-	let data = clone(req.body, true),
+	let data = clone(req.body),
 		token = req.parsed.query[config.token] || data[config.token],
 		webhook = token ? stores.webhooks.get(token) : undefined;
 

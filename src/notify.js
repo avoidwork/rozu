@@ -12,8 +12,8 @@ function notify (type, data, template, uri) {
 		keys, text, html;
 
 	if (type === "email") {
-		text = clone(template.text, true);
-		html = clone(template.html, true);
+		text = clone(template.text);
+		html = clone(template.html);
 		keys = text.match(/({{.*}})/g);
 
 		array.each(keys, function (i) {

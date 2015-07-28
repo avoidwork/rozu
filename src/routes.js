@@ -20,7 +20,7 @@ const routes = {
 				headers;
 
 			if (session && session.passport && session.passport.user) {
-				headers = clone(req.server.config.headers, true);
+				headers = clone(req.server.config.headers);
 
 				headers["cache-control"] = "private " + headers["cache-control"];
 				res.respond(ROOT_ROUTES, 200, headers);
