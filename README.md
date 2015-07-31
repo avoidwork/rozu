@@ -23,6 +23,8 @@ the request are `uri`, & `encoding`. If not specified `encoding` will default to
 `json`, `querystring`, or `form`. The request body will contain the webhook id as the value of `config.token`, for
 validation.
 
+Custom headers for outbound webhooks are supported by specifying a `headers` value (an Object is expected).
+
 Sending an outbound webhook from Redis may look like this:
 
 ```javascript
