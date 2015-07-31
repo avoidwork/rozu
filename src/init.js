@@ -25,6 +25,9 @@ function init (lconfig) {
 	lconfig.auth.local.auth = login;
 	lconfig.rate.override = rate;
 
+	// Instantiating password validation
+	regex.password = new RegExp(lconfig.password);
+
 	// Loading DataStores
 	iterate(stores, function (i) {
 		i.register("mongo", haro_mongo);

@@ -26,7 +26,7 @@ validation.
 Sending an outbound webhook from Redis may look like this:
 
 ```javascript
-clientPublish.publish("rozu_github_send", serialize({"token": "bb8bf370-0a54-11e5-9c1d-9389475d0a28", "message": "The Matrix!"}));
+clientPublish.publish("rozu_github_send", serialize({"token": "bb8bf370-0a54-11e5-9c1d-9389475d0a28", "message": "Hello World!"}));
 ```
 
 ## Requirements
@@ -37,7 +37,7 @@ clientPublish.publish("rozu_github_send", serialize({"token": "bb8bf370-0a54-11e
 
 ## How do I run Rozu?
 `Rozu` can be up and running in 3 steps! When run in a production environment, it's recommended that you use `nginx`
-to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on Linux) to run `rozu` is ideal. 
+to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on Linux) to run `rozu` is ideal.
 
 1.  Clone [this](https://github.com/avoidwork/rozu) repository, or install from `npm`:
     1.  `$ npm install rozu`

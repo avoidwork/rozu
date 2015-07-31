@@ -52,6 +52,7 @@
 		"already_authenticated": "Already authenticated"
 	},
 	"pageSize": 10,
+	"password": "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$",
 	"template": {
 		"email": {
 			"verify": {
