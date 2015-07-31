@@ -22,7 +22,8 @@
       <h1>
 <a id="rozu" class="anchor" href="#rozu" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rozu</h1>
 
-<p>Rozu is a webhook API server, using MongoDB for persistent storage &amp; Redis for pub/sub of inbound events</p>
+<p><a href="https://gitter.im/avoidwork/rozu?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/avoidwork/rozu"></a>
+Rozu is a webhook API server, using MongoDB for persistent storage &amp; Redis for pub/sub of inbound events</p>
 
 <p><img src="https://cldup.com/yCd_d6AL58.png" alt="demo graphic" title="rozu demo"></p>
 
@@ -48,9 +49,11 @@ the request are <code>uri</code>, &amp; <code>encoding</code>. If not specified 
 <code>json</code>, <code>querystring</code>, or <code>form</code>. The request body will contain the webhook id as the value of <code>config.token</code>, for
 validation.</p>
 
+<p>Custom headers for outbound webhooks are supported by specifying a <code>headers</code> value (an Object is expected).</p>
+
 <p>Sending an outbound webhook from Redis may look like this:</p>
 
-<div class="highlight highlight-javascript"><pre>clientPublish.publish(<span class="pl-s"><span class="pl-pds">"</span>rozu_github_send<span class="pl-pds">"</span></span>, serialize({<span class="pl-s"><span class="pl-pds">"</span>token<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>bb8bf370-0a54-11e5-9c1d-9389475d0a28<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>The Matrix!<span class="pl-pds">"</span></span>}));</pre></div>
+<div class="highlight highlight-javascript"><pre>clientPublish.publish(<span class="pl-s"><span class="pl-pds">"</span>rozu_github_send<span class="pl-pds">"</span></span>, serialize({<span class="pl-s"><span class="pl-pds">"</span>token<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>bb8bf370-0a54-11e5-9c1d-9389475d0a28<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Hello World!<span class="pl-pds">"</span></span>}));</pre></div>
 
 <h2>
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
@@ -66,7 +69,7 @@ validation.</p>
 <a id="how-do-i-run-rozu" class="anchor" href="#how-do-i-run-rozu" aria-hidden="true"><span class="octicon octicon-link"></span></a>How do I run Rozu?</h2>
 
 <p><code>Rozu</code> can be up and running in 3 steps! When run in a production environment, it's recommended that you use <code>nginx</code>
-to terminate SSL, and reverse proxy to <code>Rozu</code>. Using a daemon like <code>upstart</code> (on Linux) to run <code>rozu</code> is ideal. </p>
+to terminate SSL, and reverse proxy to <code>Rozu</code>. Using a daemon like <code>upstart</code> (on Linux) to run <code>rozu</code> is ideal.</p>
 
 <ol>
 <li> Clone <a href="https://github.com/avoidwork/rozu">this</a> repository, or install from <code>npm</code>:
@@ -88,12 +91,12 @@ to terminate SSL, and reverse proxy to <code>Rozu</code>. Using a daemon like <c
 <h4>
 <a id="upstart" class="anchor" href="#upstart" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upstart</h4>
 
-<p>Use the provided upstart recipe: <code>sudo cp node_modules/rozu/rozu.conf /etc/init &amp; service start rozu</code></p>
+<p>Use the provided upstart recipe: <code>sudo cp node_modules/rozu/rozu.conf /etc/init; service start rozu</code></p>
 
 <h4>
 <a id="systemd" class="anchor" href="#systemd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Systemd</h4>
 
-<p>Use the provided systemd service: <code>sudo cp node_modules/rozu/rozu.service /etc/systemd/system &amp; systemctl enable rozu &amp; systemctl start rozu</code></p>
+<p>Use the provided systemd service: <code>sudo cp node_modules/rozu/rozu.service /etc/systemd/system; systemctl enable rozu &amp; systemctl start rozu</code></p>
 
 <h4>
 <a id="what-about-windows" class="anchor" href="#what-about-windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about Windows?</h4>
