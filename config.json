@@ -73,7 +73,7 @@
 	},
 	"valid": {
 		"users": ["firstname", "lastname", "email", "password"],
-		"webhooks": ["name", "host", "uri", "encoding"]
+		"webhooks": ["name", "host", "uri", "encoding", "headers"]
 	},
 	"session": {
 		"secret": "kermitthinkshelTer0%",

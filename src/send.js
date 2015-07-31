@@ -9,9 +9,19 @@
  */
 function send (req, res, desc) {
 	let defer = deferred(),
-		err = false,
+		valid = true,
 		encoding = "json",
+		options = {method: "POST"},
 		data, qdata, token, uri, webhook;
+
+	function err (e) {
+		log(e, "error");
+		defer.reject(e);
+	}
+
+	function success (resp) {
+		defer.resolve(resp);
+	}
 
 	if (req) {
 		data = req.body;
@@ -21,31 +31,35 @@ function send (req, res, desc) {
 		try {
 			data = JSON.parse(desc.message);
 		} catch (e) {
-			log(e, "error");
+			log(e.message, "debug");
 			data = desc.message;
 		}
 
-		token = stores.webhooks.indexes.name[desc.channel.replace(regex.send, "").replace(config.id + "_", "")][0];
-		// token = stores.wobhooks.indexes.get('name'); ?
+		token = (stores.webhooks.find({name: desc.channel.replace(regex.send, "").replace(config.id + "_", "")})[0] || [])[0];
 	}
 
 	webhook = stores.webhooks.get(token) || [null, {}];
 
 	if (!webhook[0]) {
-		err = true;
+		valid = false;
 	} else {
 		uri = webhook[1].uri;
 
 		if (!uri) {
-			err = true;
+			valid = false;
 		}
 	}
 
-	if (!err) {
-		encoding = regex.encoding.test(webhook[1].encoding) ? webhook[1].encoding : "json";
-
+	if (valid) {
 		if (res) {
 			res.respond("Accepted", 202);
+		}
+
+		encoding = regex.encoding.test(webhook[1].encoding) ? webhook[1].encoding : "json";
+		options.url = uri;
+
+		if (webhook[1].headers) {
+			options.headers = webhook[1].headers;
 		}
 
 		if (typeof data === "string") {
@@ -56,12 +70,7 @@ function send (req, res, desc) {
 
 		try {
 			if (encoding === "form") {
-				request.post(uri).form(data).on("error", function (e) {
-					log(e, "error");
-					defer.reject(e);
-				}).on("response", function (resp) {
-					defer.resolve(resp);
-				});
+				request(options).form(data).on("error", err).on("response", success);
 			} else if (encoding === "querystring") {
 				if (typeof data === "object") {
 					qdata = Object.keys(data).map(function (i) {
@@ -69,24 +78,16 @@ function send (req, res, desc) {
 					}).join("&");
 				}
 
-				uri += (uri.indexOf("?") > -1 ? "&" : "?") + qdata.replace(/^(\&|\?)/, "");
-				request.get(uri).on("error", function (e) {
-					log(e, "error");
-					defer.reject(e);
-				}).on("response", function (resp) {
-					defer.resolve(resp);
-				});
+				options.method = "GET";
+				options.url += (uri.indexOf("?") > -1 ? "&" : "?") + qdata.replace(/^(\&|\?)/, "");
+				request(options).on("error", err).on("response", success);
 			} else if (encoding === "json") {
-				request({body: data, method: "POST", json: true, uri: uri}).on("error", function (e) {
-					log(e, "error");
-					defer.reject(e);
-				}).on("response", function (resp) {
-					defer.resolve(resp);
-				});
+				options.body = data;
+				options.json = true;
+				request(options).on("error", err).on("response", success);
 			}
 		} catch (e) {
-			log(e, "error");
-			defer.reject(e);
+			err(e);
 		}
 
 		sse.send({data: data, type: "outbound", webhook: webhook[1].name});
