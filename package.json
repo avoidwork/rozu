@@ -1,6 +1,6 @@
 {
   "name": "rozu",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Webhook API/server for inbound & outbound events",
   "main": "lib/app.js",
   "scripts": {
@@ -30,7 +30,6 @@
   "homepage": "http://avoidwork.github.io/rozu",
   "dependencies": {
     "bcrypt": "^0.8.3",
-    "es6-promise": "^2.3.0",
     "express-sse": "^0.2.1",
     "haro": "^1.5.1",
     "haro-mongo": "^1.0.6",
@@ -42,6 +41,7 @@
     "request": "^2.57.0",
     "retsu": "^1.1.0",
     "tenso": "^2.0.2",
+    "tiny-defer": "^1.0.2",
     "tiny-lru": "^1.0.2"
   },
   "devDependencies": {

@@ -27,7 +27,6 @@ module.exports = function (grunt) {
 					"src/intro.js",
 					"src/regex.js",
 					"src/clone.js",
-					"src/deferred.js",
 					"src/iterate.js",
 					"src/log.js",
 					"src/merge.js",
