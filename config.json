@@ -64,7 +64,7 @@
 	},
 	"rate": {
 		"enabled": true,
-		"limit": 100,
+		"limit": 10,
 		"reset": 30,
 		"multiplier": {
 			"limit": 45,
