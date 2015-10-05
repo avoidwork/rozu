@@ -1,6 +1,6 @@
 {
   "name": "rozu",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Webhook API/server for inbound & outbound events",
   "main": "lib/app.js",
   "scripts": {

@@ -9,7 +9,7 @@ function new_user (args) {
 	let defer = deferred();
 
 	if (!args.password) {
-		args.password = mpass();
+		args.password = mpass(3, true);
 	}
 
 	password_create(args.password, function (e, hash) {
