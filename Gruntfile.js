@@ -3,7 +3,8 @@ module.exports = function (grunt) {
 		pkg : grunt.file.readJSON("package.json"),
 		babel: {
 			options: {
-				sourceMap: false
+				sourceMap: false,
+				presets: ["babel-preset-es2015"]
 			},
 			dist: {
 				files: {
@@ -63,17 +64,6 @@ module.exports = function (grunt) {
 		eslint: {
 			target: ["lib/app.es6.js"]
 		},
-		jsdoc : {
-			dist : {
-				src: ["lib/app.js", "README.md"],
-				options: {
-				    destination : "doc",
-				    template    : "node_modules/ink-docstrap/template",
-				    configure   : "docstrap.json",
-				    "private"   : false
-				}
-			}
-		},
 		mochaTest : {
 			options: {
 				reporter: "spec"
@@ -107,7 +97,6 @@ module.exports = function (grunt) {
 
 	// tasks
 	grunt.loadNpmTasks("grunt-sed");
-	grunt.loadNpmTasks("grunt-jsdoc");
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-mocha-test");
@@ -120,5 +109,5 @@ module.exports = function (grunt) {
 	grunt.registerTask("test", ["eslint", "mochaTest"]);
 	grunt.registerTask("default", ["build", "test"]);
 	grunt.registerTask("validate", "validate-package");
-	grunt.registerTask("package", ["validate", "default", "test", "jsdoc"]);
+	grunt.registerTask("package", ["validate", "default", "test"]);
 };
