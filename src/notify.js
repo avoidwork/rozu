@@ -31,20 +31,24 @@ function notify (type, data, template, uri) {
 			html = html.replace(r, v);
 		});
 
-		mta.sendMail({
-			from: config.email.from,
-			to: data.email,
-			subject: template.subject,
-			text: text,
-			html: html
-		}, function (e, info) {
-			if (e) {
-				log(e, "error");
-				defer.reject(e);
-			} else {
-				defer.resolve(info.response);
-			}
-		});
+		if (mta) {
+			mta.sendMail({
+				from: config.email.from,
+				to: data.email,
+				subject: template.subject,
+				text: text,
+				html: html
+			}, function (e, info) {
+				if (e) {
+					log(e, "error");
+					defer.reject(e);
+				} else {
+					defer.resolve(info.response);
+				}
+			});
+		} else {
+			defer.resolve(true);
+		}
 	} else {
 		defer.reject(false);
 	}

@@ -11,7 +11,7 @@ function receive (req, res) {
 		token = req.parsed.query[config.token] || data[config.token],
 		webhook = token ? stores.webhooks.get(token) : undefined;
 
-	if (!token || !webhook || (config.validate && webhook[1].host.indexOf(req.parsed.hostname) === -1)) {
+	if (!token || !webhook || config.validate && webhook[1].host.indexOf(req.parsed.hostname) === -1) {
 		res.error(401);
 	} else if (data === undefined || !regex.payload.test(typeof data)) {
 		res.error(400);

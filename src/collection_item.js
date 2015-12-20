@@ -17,7 +17,7 @@ function collection_item (req, res, type, fn, links) {
 		rec = stores[type].get(id),
 		data, output;
 
-	if (!rec || (rec && rec[1].user_id !== luser.id && !admin)) {
+	if (!rec || rec && rec[1].user_id !== luser.id && !admin) {
 		return res.error(404);
 	}
 

@@ -35,12 +35,12 @@ module.exports = function (grunt) {
 					"src/cache.js",
 					"src/password_compare.js",
 					"src/password_create.js",
-					"src/collection.js",
+					"src/load.js",
 					"src/collection_delete.js",
+					"src/collection_update.js",
 					"src/collection_item.js",
 					"src/collection_read.js",
-					"src/collection_update.js",
-					"src/load.js",
+					"src/collection.js",
 					"src/login.js",
 					"src/new_user.js",
 					"src/notify.js",
@@ -50,9 +50,9 @@ module.exports = function (grunt) {
 					"src/schedule.js",
 					"src/user.js",
 					"src/verify.js",
+					"src/serialize.js",
 					"src/receive.js",
 					"src/send.js",
-					"src/serialize.js",
 					"src/validation.js",
 					"src/routes.js",
 					"src/init.js",
@@ -71,6 +71,9 @@ module.exports = function (grunt) {
 			test : {
 				src : ["test/*_test.js"]
 			}
+		},
+		nsp: {
+			package: grunt.file.readJSON("package.json")
 		},
 		sed : {
 			version : {
@@ -100,14 +103,12 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-mocha-test");
-	grunt.loadNpmTasks("grunt-nsp-package");
+	grunt.loadNpmTasks("grunt-nsp");
 	grunt.loadNpmTasks("grunt-babel");
 	grunt.loadNpmTasks("grunt-eslint");
 
 	// aliases
 	grunt.registerTask("build", ["concat", "sed", "babel"]);
-	grunt.registerTask("test", ["eslint", "mochaTest"]);
+	grunt.registerTask("test", ["eslint", "mochaTest", "nsp"]);
 	grunt.registerTask("default", ["build", "test"]);
-	grunt.registerTask("validate", "validate-package");
-	grunt.registerTask("package", ["validate", "default", "test"]);
 };

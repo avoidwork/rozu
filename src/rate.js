@@ -9,7 +9,7 @@
  * @return {Object}          Potentially modified settings settings
  */
 function rate (req, settings) {
-	let authenticated = (req.session.passport !== undefined && req.session.passport.user !== undefined),
+	let authenticated = req.session.passport !== undefined && req.session.passport.user !== undefined,
 		limit = req.server.config.rate.limit,
 		seconds;
 

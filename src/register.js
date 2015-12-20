@@ -21,7 +21,7 @@ function register (req, res) {
 		} else {
 			new_user(args).then(function (arg) {
 				res.respond({user_id: arg.user[0], instruction: config.instruction.verify});
-				notify("email", stores.users.toArray([arg.user])[0], config.template.email.verify, ((req.headers["x-forwarded-proto"] ? req.headers["x-forwarded-proto"] + ":" : req.parsed.protocol) + "//" + (req.headers["x-forwarded-protocol"] || req.parsed.host))).then(null, function (e) {
+				notify("email", stores.users.toArray([arg.user])[0], config.template.email.verify, (req.headers["x-forwarded-proto"] ? req.headers["x-forwarded-proto"] + ":" : req.parsed.protocol) + "//" + (req.headers["x-forwarded-protocol"] || req.parsed.host)).then(null, function (e) {
 					log(e, "error");
 				});
 			}, function (e) {
