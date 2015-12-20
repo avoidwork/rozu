@@ -1,5 +1,3 @@
-"use strict";
-
 const path = require("path"),
 	ROOT = path.join(__dirname, ".."),
 	VERSION = "{{VERSION}}",

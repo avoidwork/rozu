@@ -8,15 +8,17 @@
 function init (lconfig) {
 	let deferreds = [];
 
-	mta = nodemailer.createTransport({
-		host: lconfig.email.host,
-		port: lconfig.email.port,
-		secure: lconfig.email.secure,
-		auth: {
-			user: lconfig.email.user,
-			pass: lconfig.email.pass
-		}
-	});
+	if (lconfig.email.host && lconfig.email.host !== "smtp.host") {
+		mta = nodemailer.createTransport({
+			host: lconfig.email.host,
+			port: lconfig.email.port,
+			secure: lconfig.email.secure,
+			auth: {
+				user: lconfig.email.user,
+				pass: lconfig.email.pass
+			}
+		});
+	}
 
 	// Caching authenticated root route
 	ROOT_ROUTES = clone(lconfig.auth.protect).concat(["logout", "receive"]).sort();

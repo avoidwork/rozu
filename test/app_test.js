@@ -92,7 +92,9 @@ describe("Public", function () {
 				.send({token: "abc", message: "Hello World"})
 				.expectStatus(401)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
-				.expectValue("links", [])
+				.expectValue("links", [
+					{uri: '/', rel: 'collection'}
+				])
 				.expectValue("data", null)
 				.expectValue("error", "Unauthorized")
 				.expectValue("status", 401)
