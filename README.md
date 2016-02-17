@@ -167,5 +167,5 @@ A `GET` request to `/` will return different results, depending upon the state o
 ```
 
 ## License
-Copyright (c) 2015 Jason Mulligan  
+Copyright (c) 2016 Jason Mulligan  
 All Rights Reserved

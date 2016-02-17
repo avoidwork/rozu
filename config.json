@@ -8,11 +8,11 @@
 			"enabled": true
 		}
 	},
+	"cacheSize": 1000,
 	"collection": 1000,
-	"logs": {
+	"logging": {
 		"level": "info",
-		"stdout": true,
-		"dtrace": false
+		"enabled": true
 	},
 	"headers": {
 		"accept": "application/json",

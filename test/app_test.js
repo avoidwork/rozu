@@ -4,7 +4,7 @@ var hippie = require("hippie"),
 	csrf = 'x-csrf-token',
 	token;
 
-app.server.config.logs.stdout = false;
+app.server.config.logging.enabled = false;
 
 function persistCookies (opts, next) {
 	opts.jar = true;
