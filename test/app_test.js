@@ -2,6 +2,11 @@ var hippie = require("hippie"),
 	app = require("../lib/app"),
 	array = require("retsu"),
 	csrf = 'x-csrf-token',
+	rnd = Math.floor(Math.random() * (1e8 - 1) + 1),
+	FIRSTNAME = "John",
+	LASTNAME = "Doe",
+	EMAIL = "jdoe_" + rnd + "@nowhere",
+	PASSWORD = "blahBlah1",
 	token;
 
 app.server.config.logging.enabled = false;
@@ -38,6 +43,7 @@ describe("Public", function () {
 					if (err) {
 						throw err;
 					}
+
 					done();
 				});
 		});
@@ -59,6 +65,7 @@ describe("Public", function () {
 					if (err) {
 						throw err;
 					}
+
 					done();
 				});
 		});
@@ -80,6 +87,7 @@ describe("Public", function () {
 					if (err) {
 						throw err;
 					}
+
 					done();
 				});
 		});
@@ -102,6 +110,7 @@ describe("Public", function () {
 					if (err) {
 						throw err;
 					}
+
 					done();
 				});
 		});
@@ -123,6 +132,7 @@ describe("Public", function () {
 					if (err) {
 						throw err;
 					}
+
 					done();
 				});
 		});
@@ -133,7 +143,7 @@ describe("Public", function () {
 			api()
 				.post("/register")
 				.form()
-				.send({firstname: "John", lastname: "Doe", email: "jdoe@nowhere", password: 'blahBlah1'})
+				.send({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
 				.expectStatus(403)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("data", null)
@@ -143,6 +153,7 @@ describe("Public", function () {
 					if (err) {
 						throw err;
 					}
+
 					done();
 				});
 		});
@@ -160,7 +171,7 @@ describe("Public", function () {
 					.header(csrf, token)
 					.post("/register")
 					.form()
-					.send({firstname: "John", lastname: "Doe", email: "jdoe@nowhere", password: "blahBlah1"})
+					.send({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
 					.json()
 					.expectStatus(200)
 					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
