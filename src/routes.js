@@ -1,5 +1,3 @@
-const http = require("http");
-
 /**
  * API routes
  *
@@ -94,25 +92,6 @@ const routes = {
 		}
 	},
 	coap: {
-		request: (req, res, coapServer, tensoServer) => {
-			let method = req.method,
-				result, status;
-
-			if (method === "GET") {
-				status = 200;
-				result = tensoServer.serialize(undefined, {
-					"instruction": config.instruction.receive
-				});
-			} else if (method === "POST") {
-				status = 202;
-				result = tensoServer.serialize(undefined, http.STATUS_CODE[status]);
-			} else {
-				status = 405;
-				result = tensoServer.serialize(undefined, new Error(status));
-			}
-
-			res.writeHead(status, {"Content-Format": "application/json"});
-			res.send(result);
-		}
+		request: coap
 	}
 };

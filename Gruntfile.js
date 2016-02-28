@@ -41,6 +41,7 @@ module.exports = function (grunt) {
 					"src/collection_item.js",
 					"src/collection_read.js",
 					"src/collection.js",
+					"src/coap.js",
 					"src/login.js",
 					"src/new_user.js",
 					"src/notify.js",
