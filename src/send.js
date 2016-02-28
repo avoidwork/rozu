@@ -1,5 +1,5 @@
 /**
- * Outbound webhook handler
+ * Webhook sender
  *
  * @method send
  * @param  {Object} req Client request
