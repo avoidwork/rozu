@@ -38,7 +38,7 @@
 	},
 	"instruction": {
 		"receive": "POST must include valid token",
-		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha-numeric characters",
+		"register": "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha, numeric & special characters",
 		"send": "POST must include valid token",
 		"success": "Success",
 		"webhooks_create": "POST 'name', & 'host'",
@@ -52,7 +52,7 @@
 		"already_authenticated": "Already authenticated"
 	},
 	"pageSize": 10,
-	"password": "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$",
+	"password": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,20}",
 	"template": {
 		"email": {
 			"verify": {

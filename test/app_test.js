@@ -6,7 +6,7 @@ var hippie = require("hippie"),
 	FIRSTNAME = "John",
 	LASTNAME = "Doe",
 	EMAIL = "jdoe_" + rnd + "@nowhere",
-	PASSWORD = "blahBlah1",
+	PASSWORD = "blahBlah1@",
 	token;
 
 app.server.config.logging.enabled = false;
@@ -125,7 +125,7 @@ describe("Public", function () {
 				.expectValue("links", [
 					{uri: '/', rel: 'collection'}
 				])
-				.expectValue("data", {instruction: "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha-numeric characters"})
+				.expectValue("data", {instruction: "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha, numeric & special characters"})
 				.expectValue("error", null)
 				.expectValue("status", 200)
 				.end(function (err) {
