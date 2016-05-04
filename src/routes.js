@@ -22,7 +22,10 @@ const routes = {
 			if (session && session.passport && session.passport.user) {
 				headers = clone(req.server.config.headers);
 
-				headers["cache-control"] = "private " + headers["cache-control"];
+				if (!regex.private.test(headers["cache-control"])) {
+					headers["cache-control"] += "private, ";
+				}
+
 				res.respond(ROOT_ROUTES, 200, headers);
 			} else {
 				res.respond(["login", "receive", "register"]);

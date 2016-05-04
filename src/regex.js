@@ -11,6 +11,7 @@ let regex = {
 	invite: /^\/invite/,
 	lastname: /(\w*){2,}/,
 	payload: /string|object/,
+	private: /private/,
 	send: /_send$/,
 	std_port: /^(80|443)$/,
 	trailing_s: /s$/,

@@ -1,6 +1,6 @@
 {
   "name": "rozu",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Webhook API/server for inbound & outbound events",
   "main": "lib/app.js",
   "engines": {
@@ -46,7 +46,7 @@
     "redis": "~1.0.0",
     "request": "~2.69.0",
     "retsu": "~2.0.0",
-    "tenso": "~3.3.9",
+    "tenso": "~3.3.10",
     "tiny-defer": "~1.0.4",
     "tiny-lru": "~1.1.0"
   },

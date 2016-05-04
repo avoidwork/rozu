@@ -15,7 +15,6 @@
 		"enabled": true
 	},
 	"headers": {
-		"accept": "application/json",
 		"cache-control": "private, no-cache"
 	},
 	"defaults": {
