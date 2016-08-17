@@ -1,10 +1,11 @@
 {
   "name": "rozu",
   "version": "4.0.0",
-  "description": "Webhook API/server for inbound & outbound events",
+  "description": "Webhook server for inbound & outbound events",
   "main": "lib/app.js",
+  "engineStrict": true,
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "test": "grunt test"
