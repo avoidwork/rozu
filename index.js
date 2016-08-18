@@ -1,35 +1,18 @@
 "use strict";
 
-const fs = require("fs"),
-	path = require("path"),
-	merge = require("tiny-merge"),
-	root = __dirname,
-	cfg = require(path.join(root, "config.json")),
-	clone = require(path.join(root, "lib", "clone.js")),
-	rozu = require(path.join(root, "lib", "rozu.js"));
+const path = require("path"),
+	tenso = require("tenso"),
+	config = require(path.join(__dirname, "config.json")),
+	login = require(path.join(__dirname, "lib", "login.js")),
+	rate = require(path.join(__dirname, "lib", "rate.js")),
+	routes = require(path.join(__dirname, "lib", "routes.js"));
 
-function factory (arg) {
-	let hostname = arg ? arg.hostname || "localhost" : "localhost",
-		hosts = {},
-		config = arg ? merge(clone(cfg), arg) : clone(cfg),
-		obj;
+function factory () {
+	config.auth.local.auth = login;
+	config.rate.override = rate;
+	config.routes = routes;
 
-	if (!config.port) {
-		console.error("Invalid configuration");
-		process.exit(1);
-	}
-
-	hosts[hostname] = "www";
-	config.root = root;
-	config.hosts = hosts;
-	config.default = hostname;
-	config.template = fs.readFileSync(config.template || path.join(config.root, "template.html"), {encoding: "utf8"});
-	obj = tenso(config);
-	obj.hostname = hostname;
-	utility.bootstrap(obj, config);
-	obj.server.start(config);
-
-	return obj;
+	return tenso(config);
 }
 
-module.exports = factory;
+module.exports = factory();

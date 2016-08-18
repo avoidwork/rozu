@@ -82,6 +82,20 @@
 			"port": 6379
 		}
 	},
+	stores: [
+		{
+			id: "users",
+			index: ["email", "active|email|verified"]
+		},
+		{
+			id: "webhooks",
+			index: ["user_id", "host", "name"]
+		},
+		{
+			id: "verify",
+			index: ["user_id"]
+		}
+	],
 	"title": "rozu",
 	"id": "rozu",
 	"validate": false,
