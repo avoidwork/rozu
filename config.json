@@ -52,7 +52,7 @@
 	},
 	"pageSize": 10,
 	"password": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,20}",
-	"template": {
+	"templates": {
 		"email": {
 			"verify": {
 				"subject": "Verify your Rozu account",
@@ -82,18 +82,18 @@
 			"port": 6379
 		}
 	},
-	stores: [
+	"stores": [
 		{
-			id: "users",
-			index: ["email", "active|email|verified"]
+			"id": "users",
+			"index": ["email", "active|email|verified"]
 		},
 		{
-			id: "webhooks",
-			index: ["user_id", "host", "name"]
+			"id": "webhooks",
+			"index": ["user_id", "host", "name"]
 		},
 		{
-			id: "verify",
-			index: ["user_id"]
+			"id": "verify",
+			"index": ["user_id"]
 		}
 	],
 	"title": "rozu",

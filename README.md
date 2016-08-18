@@ -44,9 +44,9 @@ to terminate SSL, and reverse proxy to `Rozu`. Using a daemon like `upstart` (on
 1.  Clone [this](https://github.com/avoidwork/rozu) repository, or install from `npm`:
     1.  `$ npm install rozu`
     2.  `$ ln -s node_modules/rozu/config.json config.json`
-    3.  `$ ln -s node_modules/rozu/lib/app.js app.js`
+    3.  `$ ln -s node_modules/rozu/index.js index.js`
 2.  Edit `config.json` to configure your email server, etc.
-3.  Run via `node app.js`
+3.  Run via `node index.js`
 
 #### Upstart
 Use the provided upstart recipe: `sudo cp node_modules/rozu/rozu.conf /etc/init; service start rozu`
