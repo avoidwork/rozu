@@ -1,5 +1,5 @@
 var hippie = require("hippie"),
-	app = require("../lib/app"),
+	app = require("../index.js"),
 	array = require("retsu"),
 	csrf = 'x-csrf-token',
 	rnd = Math.floor(Math.random() * (1e8 - 1)) + 1,
