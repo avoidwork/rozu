@@ -2,7 +2,7 @@
   "name": "rozu",
   "version": "4.0.0",
   "description": "Webhook server for inbound & outbound events",
-  "main": "lib/app.js",
+  "main": "index.js",
   "engineStrict": true,
   "engines": {
     "node": ">=6.0.0"
