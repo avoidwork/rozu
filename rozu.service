@@ -3,7 +3,7 @@ Description=Job that runs the rozu server
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/node /opt/rozu/app.js
+ExecStart=/usr/bin/node /opt/rozu/index.js
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
