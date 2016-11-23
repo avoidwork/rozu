@@ -1,7 +1,6 @@
 var hippie = require("hippie"),
 	app = require("../index.js"),
-	array = require("retsu"),
-	csrf = 'x-csrf-token',
+	csrf = "x-csrf-token",
 	rnd = Math.floor(Math.random() * (1e8 - 1)) + 1,
 	FIRSTNAME = "John",
 	LASTNAME = "Doe",
@@ -13,7 +12,7 @@ app.server.config.logging.enabled = false;
 
 function persistCookies (opts, next) {
 	opts.jar = true;
-	next( opts );
+	next(opts);
 }
 
 function api () {
@@ -32,11 +31,11 @@ describe("Public", function () {
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS")
 				.expectValue("links", [
-					{uri: '/login', rel: 'item'},
-					{uri: '/receive', rel: 'item'},
-					{uri: '/register', rel: 'item'}
+					{uri: "/login", rel: "item"},
+					{uri: "/receive", rel: "item"},
+					{uri: "/register", rel: "item"}
 				])
-				.expectValue("data", ['login', 'receive', 'register'])
+				.expectValue("data", ["login", "receive", "register"])
 				.expectValue("error", null)
 				.expectValue("status", 200)
 				.end(function (err) {
@@ -56,7 +55,7 @@ describe("Public", function () {
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
-					{uri: '/', rel: 'collection'}
+					{uri: "/", rel: "collection"}
 				])
 				.expectValue("data", {instruction: "POST 'username' & 'password' to authenticate"})
 				.expectValue("error", null)
@@ -78,7 +77,7 @@ describe("Public", function () {
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
-					{uri: '/', rel: 'collection'}
+					{uri: "/", rel: "collection"}
 				])
 				.expectValue("data", {instruction: "POST must include valid token"})
 				.expectValue("error", null)
@@ -101,7 +100,7 @@ describe("Public", function () {
 				.expectStatus(401)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
-					{uri: '/', rel: 'collection'}
+					{uri: "/", rel: "collection"}
 				])
 				.expectValue("data", null)
 				.expectValue("error", "Unauthorized")
@@ -123,7 +122,7 @@ describe("Public", function () {
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
-					{uri: '/', rel: 'collection'}
+					{uri: "/", rel: "collection"}
 				])
 				.expectValue("data", {instruction: "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha, numeric & special characters"})
 				.expectValue("error", null)
@@ -177,11 +176,7 @@ describe("Public", function () {
 					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 					.expectValue("error", null)
 					.expectValue("status", 200)
-					.end(function (err) {
-						if (err) {
-							throw err;
-						}
-
+					.end(function () {
 						done();
 					});
 			});
