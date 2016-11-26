@@ -1,0 +1,10 @@
+node_modules
+test
+.eslintc
+.gitignore
+.npmignore
+.travis.yml
+Gruntfile.js
+npm-debug.log
+rozu.conf
+rozu.service
