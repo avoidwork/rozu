@@ -10,6 +10,9 @@
 	},
 	"cacheSize": 1000,
 	"collection": 1000,
+	"etags": {
+		"ignore": ["/"]
+	},
 	"logging": {
 		"level": "info",
 		"enabled": true
