@@ -8,6 +8,8 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "mongo": "docker run -d --name mongo -p 27017:27017 mongo",
+    "redis": "docker run -d --name redis -p 6379:6379 redis",
     "test": "grunt test",
     "start": "node index.js"
   },
