@@ -182,4 +182,29 @@ describe("Public", function () {
 			});
 		});
 	});
+
+	describe("POST /register (duplicate email error)", function () {
+		it("returns an object with instructions", function (done) {
+			get_token(function (err, res) {
+				if (err) {
+					throw err;
+				}
+
+				token = res.headers[csrf];
+				api()
+					.header(csrf, token)
+					.post("/register")
+					.form()
+					.send({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
+					.json()
+					.expectStatus(400)
+					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
+					.expectValue("data", null)
+					.expectValue("status", 400)
+					.end(function () {
+						done();
+					});
+			});
+		});
+	});
 });
