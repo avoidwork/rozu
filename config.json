@@ -110,5 +110,9 @@
 	"token": "token",
 	"coap": {
 		"enabled": false
+	},
+	"retry": {
+		"delay": 250,
+		"max": 5
 	}
 }
