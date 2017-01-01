@@ -95,6 +95,10 @@
 			"index": ["user_id", "host", "name"]
 		},
 		{
+			"id": "log",
+			"index": ["user_id", "webhook_id", "type", "delivered"]
+		},
+		{
 			"id": "verify",
 			"index": ["user_id"]
 		}
