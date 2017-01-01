@@ -102,6 +102,7 @@
 	"title": "rozu",
 	"id": "rozu",
 	"validate": false,
+	"verify": "",
 	"token": "token",
 	"coap": {
 		"enabled": false
