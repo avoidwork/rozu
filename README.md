@@ -79,8 +79,12 @@ To logout, make a `GET` request to `/logout`.
 ## Your Profile
 Make a `GET` request to `/profile`. You will have CRUD operations, defined by the `allow` header.
 
+An `SSE` (Server Sent Event) stream is available at `/profile/stream`.
+
 ## Getting Administrator Access
 Once authenticated, make `GET` request to `/admin`; this requires your account email address in the `admin` Array in `config.json`.
+
+An `SSE` (Server Sent Event) stream for administrators is available at `/stream`.
 
 ## Routes
 A `GET` request to `/` will return different results, depending upon the state of your session.
