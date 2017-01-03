@@ -32,7 +32,7 @@ clientPublish.publish("rozu_github_send", serialize({"token": "bb8bf370-0a54-11e
 ```
 
 ## Requirements
-- node.js or io.js
+- node.js
 - MongoDB (persistent storage of accounts, & webhook configurations)
 - Redis (pub/sub for local stack of inbound events)
 - (Optional) nginx for SSL termination, & reverse proxy
