@@ -1,6 +1,5 @@
 # Rozu
 
-[![Join the chat at https://gitter.im/avoidwork/rozu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/avoidwork/rozu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Rozu is a webhook API server, using MongoDB for persistent storage & Redis for pub/sub of inbound events
 
 ![demo graphic](https://cldup.com/yCd_d6AL58.png "rozu demo")
