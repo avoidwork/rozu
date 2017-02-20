@@ -1,6 +1,6 @@
 {
   "name": "rozu",
-  "version": "4.2.12",
+  "version": "4.2.13",
   "description": "Webhook server for inbound & outbound events",
   "main": "index.js",
   "engineStrict": true,
@@ -49,7 +49,7 @@
     "redis": "~2.6.3",
     "request": "~2.79.0",
     "retsu": "~2.0.3",
-    "tenso": "~4.3.26",
+    "tenso": "~4.3.30",
     "tiny-defer": "~2.0.2",
     "tiny-lru": "~1.4.7",
     "uuid": "~3.0.1"
@@ -61,7 +61,7 @@
     "grunt-eslint": "~19.0.0",
     "grunt-mocha-test": "~0.13.2",
     "grunt-nsp": "~2.3.1",
-    "hippie": "~0.5.1",
-    "mocha": "~3.1.2"
+    "mocha": "~3.2.0",
+    "tiny-httptest": "^1.0.5"
   }
 }

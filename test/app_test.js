@@ -1,33 +1,19 @@
-var hippie = require("hippie"),
+const tinyhttptest = require("tiny-httptest"),
 	app = require("../index.js"),
 	csrf = "x-csrf-token",
 	rnd = Math.floor(Math.random() * (1e8 - 1)) + 1,
 	FIRSTNAME = "John",
 	LASTNAME = "Doe",
 	EMAIL = "jdoe_" + rnd + "@nowhere",
-	PASSWORD = "blahBlah1@",
-	token;
+	PASSWORD = "blahBlah1@";
 
 app.server.config.logging.enabled = false;
 
-function persistCookies (opts, next) {
-	opts.jar = true;
-	next(opts);
-}
-
-function api () {
-	return hippie().base("http://localhost:8090").use(persistCookies).expectHeader("Content-Type", "application/json").json();
-}
-
-function get_token (fn, url) {
-	return api().get(url || "/login").end(fn);
-}
-
 describe("Public", function () {
 	describe("GET / returns Array of public APIs", function () {
-		it("returns an array of endpoints", function (done) {
-			api()
-				.get("/")
+		it("returns an array of endpoints", function () {
+			return tinyhttptest({url: "http://localhost:8090"})
+				.cookies()
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS")
 				.expectValue("links", [
@@ -38,20 +24,14 @@ describe("Public", function () {
 				.expectValue("data", ["login", "receive", "register"])
 				.expectValue("error", null)
 				.expectValue("status", 200)
-				.end(function (err) {
-					if (err) {
-						throw err;
-					}
-
-					done();
-				});
+				.end();
 		});
 	});
 
 	describe("GET /login returns instructions", function () {
-		it("returns an object with instructions", function (done) {
-			api()
-				.get("/login")
+		it("returns an object with instructions", function () {
+			return tinyhttptest({url: "http://localhost:8090/login"})
+				.cookies()
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
@@ -60,20 +40,14 @@ describe("Public", function () {
 				.expectValue("data", {instruction: "POST 'username' & 'password' to authenticate"})
 				.expectValue("error", null)
 				.expectValue("status", 200)
-				.end(function (err) {
-					if (err) {
-						throw err;
-					}
-
-					done();
-				});
+				.end();
 		});
 	});
 
 	describe("GET /receive returns instructions", function () {
-		it("returns an object with instructions", function (done) {
-			api()
-				.get("/receive")
+		it("returns an object with instructions", function () {
+			return tinyhttptest({url: "http://localhost:8090/receive"})
+				.cookies()
 				.expectStatus(200)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
@@ -82,21 +56,15 @@ describe("Public", function () {
 				.expectValue("data", {instruction: "POST must include valid token"})
 				.expectValue("error", null)
 				.expectValue("status", 200)
-				.end(function (err) {
-					if (err) {
-						throw err;
-					}
-
-					done();
-				});
+				.end();
 		});
 	});
 
 	describe("POST /receive returns instructions", function () {
-		it("returns an object with instructions", function (done) {
-			api()
-				.post("/receive")
-				.send({token: "abc", message: "Hello World"})
+		it("returns an object with an error", function () {
+			return tinyhttptest({url: "http://localhost:8090/receive", method: "post"})
+				.json({token: "abc", message: "Hello World"})
+				.cookies()
 				.expectStatus(401)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
@@ -105,21 +73,16 @@ describe("Public", function () {
 				.expectValue("data", null)
 				.expectValue("error", "Unauthorized")
 				.expectValue("status", 401)
-				.end(function (err) {
-					if (err) {
-						throw err;
-					}
-
-					done();
-				});
+				.end();
 		});
 	});
 
 	describe("GET /register returns instructions", function () {
-		it("returns an object with instructions", function (done) {
-			api()
-				.get("/register")
+		it("returns an object with instructions", function () {
+			return tinyhttptest({url: "http://localhost:8090/register"})
+				.cookies()
 				.expectStatus(200)
+				.captureHeader(csrf)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("links", [
 					{uri: "/", rel: "collection"}
@@ -127,84 +90,49 @@ describe("Public", function () {
 				.expectValue("data", {instruction: "POST your 'firstname', 'lastname', 'email', & 'password' to register; password must be 8-20 mixed case alpha, numeric & special characters"})
 				.expectValue("error", null)
 				.expectValue("status", 200)
-				.end(function (err) {
-					if (err) {
-						throw err;
-					}
-
-					done();
-				});
+				.end();
 		});
 	});
 
 	describe("POST /register (csrf error)", function () {
-		it("returns an object with an error", function (done) {
-			api()
-				.post("/register")
-				.form()
-				.send({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
+		it("returns an object with an error", function () {
+			return tinyhttptest({url: "http://localhost:8090/register", method: "post"})
+				.json({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
+				.cookies()
 				.expectStatus(403)
 				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
 				.expectValue("data", null)
 				.expectValue("error", "CSRF token missing")
 				.expectValue("status", 403)
-				.end(function (err) {
-					if (err) {
-						throw err;
-					}
-
-					done();
-				});
+				.end();
 		});
 	});
 
 	describe("POST /register success", function () {
-		it("returns an object with instructions", function (done) {
-			get_token(function (err, res) {
-				if (err) {
-					throw err;
-				}
-
-				token = res.headers[csrf];
-				api()
-					.header(csrf, token)
-					.post("/register")
-					.form()
-					.send({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
-					.json()
-					.expectStatus(200)
-					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
-					.expectValue("error", null)
-					.expectValue("status", 200)
-					.end(function () {
-						done();
-					});
-			});
+		it("returns an object with instructions", function () {
+			return tinyhttptest({url: "http://localhost:8090/register", method: "post"})
+				.cookies()
+				.reuseHeader(csrf)
+				.json({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
+				.expectStatus(200)
+				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
+				.expectValue("error", null)
+				.expectValue("status", 200)
+				.end();
 		});
 	});
 
 	describe("POST /register (duplicate email error)", function () {
-		it("returns an object with instructions", function (done) {
-			get_token(function (err, res) {
-				if (err) {
-					throw err;
-				}
-
-				token = res.headers[csrf];
-				api()
-					.header(csrf, token)
-					.post("/register")
-					.form()
-					.send({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
-					.json()
-					.expectStatus(400)
-					.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
-					.expectValue("data", null)
-					.expectValue("status", 400)
-					.end(function () {
-						done();
-					});
-			});
+		it("returns an object with an error", function () {
+			return tinyhttptest({url: "http://localhost:8090/register", method: "post"})
+				.cookies()
+				.reuseHeader(csrf)
+				.json({firstname: FIRSTNAME, lastname: LASTNAME, email: EMAIL, password: PASSWORD})
+				.expectStatus(400)
+				.expectHeader("allow", "GET, HEAD, OPTIONS, POST")
+				.expectValue("data", null)
+				.expectValue("status", 400)
+				.end();
 		});
 	});
 });
